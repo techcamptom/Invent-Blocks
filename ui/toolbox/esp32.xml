@@ -2271,11 +2271,6 @@ _
         </value>
       </block>
       <block type="mqtt_publish_payload">
-<category name="%{BKY_CAT_ULTRASOUND}">        <value name="topic">
-          <shadow type="text">
-            <field name="TEXT"></field>
-          </shadow>
-        </value>
         <value name="payload">
           <shadow type="text">
             <field name="TEXT"></field>
