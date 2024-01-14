@@ -1,4 +1,43 @@
 <document>
+  <category name="Invent!" colour="10">
+      <block type="invent_initialise"></block>
+      <block type="invent_move">
+        <value name="DISTANCE">
+          <shadow type="math_number">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="invent_turn">
+        <value name="DEGREES">
+          <shadow type="math_number">
+            <field name="NUM">45</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="invent_spin">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="invent_speed">
+        <value name="SPEED">
+          <shadow type="math_number">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="invent_stop">
+      </block>
+      <block type="invent_moving">
+      </block>
+      <block type="invent_sensor">
+      </block>
+      <block type="invent_gamepad">
+      </block>
+  </category>
   <category name="%{BKY_CATLOGIC}" colour="%{BKY_LOGIC_HUE}">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>

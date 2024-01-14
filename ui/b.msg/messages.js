@@ -42,6 +42,9 @@
  */
 
 /** @type {string} */
+/// {{Notranslate}} Hue value for all Invent blocks.
+Blockly.Msg.INVENT_HUE = '20';
+/** @type {string} */
 /// {{Notranslate}} Hue value for all logic blocks.
 Blockly.Msg.LOGIC_HUE = '210';
 /** @type {string} */

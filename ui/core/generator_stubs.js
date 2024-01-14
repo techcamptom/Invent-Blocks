@@ -4,6 +4,49 @@
  */
 let UPythonClass = {}
 
+Blockly.Python["invent_initialise"] = function(block) {
+	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	return '';
+};
+
+Blockly.Python['invent_move'] = function(block) {
+	var value_distance = Blockly.Python.valueToCode(block, 'DISTANCE', Blockly.Python.ORDER_ATOMIC);
+	var value_wait = block.getFieldValue('WAIT');  
+	var code = `move(${value_distance},"${value_wait}")\n`;
+	return code;
+};
+Blockly.Python['invent_turn'] = function(block) {
+	var value_degrees = block.getFieldValue('DEGREES');
+	var value_wait = block.getFieldValue('WAIT');  
+	var code = `turn(${value_degrees},"${value_wait}")\n`;
+	return code;
+};
+Blockly.Python['invent_spin'] = function(block) {
+	var value_direction = block.getFieldValue('DIRECTION');
+	var value_times = block.getFieldValue('TIMES');
+	var value_wait = block.getFieldValue('WAIT');  
+	var code = `spin("${value_direction}",${value_times},"${value_wait}")\n`;
+	return code;
+};
+Blockly.Python['invent_speed'] = function(block) {
+	var value_speed = Blockly.Python.valueToCode(block, 'SPEED', Blockly.Python.ORDER_ATOMIC);
+	var code = `setspeed(${value_speed})\n`;
+	return code;
+};
+Blockly.Python['invent_stop'] = function(block) {
+	return 'move(0,"false")\n';
+};
+Blockly.Python['invent_moving'] = function(block) {
+	return ['ismoving()', Blockly.JavaScript.ORDER_NONE]; 
+};
+Blockly.Python['invent_sensor'] = function(block) {
+	var value_channel = block.getFieldValue('CHANNEL');
+	return [`readsensor("${value_channel}")`, Blockly.JavaScript.ORDER_NONE];
+};
+Blockly.Python['invent_gamepad'] = function(block) {
+	return ['getgamepadbuttons()',Blockly.JavaScript.ORDER_NONE];
+};
+  
 Blockly.Python['project_metadata'] = function(block) {
   var value_project_author = Blockly.Python.valueToCode(block, 'project_author', Blockly.Python.ORDER_ATOMIC);
   var value_project_iot_id = Blockly.Python.valueToCode(block, 'project_iot_id', Blockly.Python.ORDER_ATOMIC);

@@ -1,3 +1,136 @@
+Blockly.Blocks['invent_initialise'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Invent! Initialise");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(10);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['invent_move'] = {
+  init: function() {
+    this.appendValueInput("DISTANCE")
+        .setCheck("Number")
+        .appendField("Move");
+    this.appendDummyInput()
+        .appendField("cm")
+        .appendField(new Blockly.FieldDropdown([["wait","true"], ["no wait","false"]]), "WAIT");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(10);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['invent_speed'] = {
+  init: function() {
+    this.appendValueInput("SPEED")
+        .setCheck("Number")
+        .appendField("Speed");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(10);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['invent_turn'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Turn")
+        .appendField(new Blockly.FieldAngle(90,null,{clockwise:true,offset:90,wrap:180}), "DEGREES");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["wait","true"], ["no wait","false"]]), "WAIT");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(10);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['invent_spin'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Spin")
+        .appendField(new Blockly.FieldDropdown([["clockwise","cw"], ["anticlockwise","acw"]]), "DIRECTION")
+        .appendField(new Blockly.FieldNumber(0, 1, 10), "TIMES")
+        .appendField("times")
+        .appendField(new Blockly.FieldDropdown([["wait","true"], ["no wait","false"]]), "WAIT");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(10);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['invent_stop'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Stop");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(10);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['invent_moving'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Moving");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(10);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['invent_sensor'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Sensor")
+        .appendField(new Blockly.FieldDropdown([["left","left"], ["right","right"]]), "CHANNEL");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(10);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['invent_gamepad'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Gamepad buttons");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(10);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['invent_inbuilt_led'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Inbuilt LED")
+        .appendField(new Blockly.FieldColour("#ff0000"), "value");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(10);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
 Blockly.Blocks['pwm'] = {
   init: function(){
     this.appendDummyInput()
