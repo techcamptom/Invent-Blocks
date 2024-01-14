@@ -207,6 +207,9 @@ h1 {
   display: inline-flex;
   align-items: center;
 }
+#bluetoothButton{
+  display: none;
+}
 .channel-panel .icon:before{
   margin-right: .25rem;
 }
