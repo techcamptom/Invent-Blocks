@@ -204,6 +204,7 @@ class websocket {
    * @param {string} pass - password to connect to the device
    */
   connect (url, pass) {
+    url = 'ws://'+url+':8266/';
     UI ['workspace'].connecting ();
     this.ws = new WebSocket(url);
     this.ws.binaryType = 'arraybuffer';
