@@ -210,7 +210,7 @@ class websocket {
     this.ws.binaryType = 'arraybuffer';
     this.ws.onopen = () => {
       term.on();
-      term.write('\x1b[31mWelcome to BIPES Project using MicroPython!\x1b[m\r\n');
+      term.write('\x1b[31mWelcome to Invent Blocks using MicroPython!\x1b[m\r\n');
 
       term.write('\x1b[31mSending password...\x1b[m\r\n');
       this.ws.send(pass + '\n\n'); //this.buffer_.push(pass);

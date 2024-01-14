@@ -26,7 +26,7 @@ function ValidateIPaddress(ipaddress) {
 }
 
 function scan() {
-	var ports = [8266, 8261];
+	var ports = [8266];
 	var found=0;
 	var count=0;
 	var last=255;
@@ -47,10 +47,11 @@ function scan() {
 	s.onerror = function() {
 		count++;
 		t=this.url.split(":")[1];
+		ip=t.replace('//','');
 		i=t.split(".")[3];
 
 		var div = document.getElementById('resultE');
-		div.innerHTML += this.url + '<br>';
+		div.innerHTML += ip + '<br>';
 
 		var div = document.getElementById('wait');
 		div.innerHTML = "Status: " + count + "/" + last + " IPs scanned" + '<br>';
@@ -69,11 +70,12 @@ function scan() {
 		found++;
 		count++;
 		t=this.url.split(":")[1];
+		ip=t.replace('//','');
 		i=t.split(".")[3];
 		var div = document.getElementById('result');
-		div.innerHTML += "<a href=#>" + this.url + '</a>';
+		div.innerHTML += "<a href=#>" + ip + '</a>';
 
-		div.innerHTML += ' <input type="button" value="Select" onclick="SetName(\'' + this.url + '\');" /><br>';
+		div.innerHTML += ' <input type="button" value="Select" onclick="SetName(\'' + ip + '\');" /><br>';
 
 
 
@@ -95,8 +97,9 @@ function scan() {
 }
 </script>
 <body>
+<div style="padding:20px;">
 	<center>
-	<p> BIPES WebREPL Scanner</p>
+	<p> Invent! WebREPL Scanner</p>
 	</center>
 	Network prefix: <input type="text" id="network" name="network" value="192.168.0"> <button onclick="scan()">Start scan</button>
 
@@ -114,6 +117,7 @@ Not found:
 
 
 <br>
+</div>
 <script type="text/javascript">
     function SetName(pIn) {
         if (window.opener != null && !window.opener.closed) {
