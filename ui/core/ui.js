@@ -742,6 +742,7 @@ workspace.prototype.loadXML = function () {
   if  (this.loadButton.files [0] != undefined) {
     let file = this.loadButton.files [0]
     if(/.xml$/.test(file.name) && file.type == 'text/xml'){
+      Blockly.getMainWorkspace().clear();
       let reader = new FileReader ();
       reader.readAsText(file,'UTF-8');
       let self = this;
