@@ -6333,9 +6333,9 @@ Blockly.Python['anemo_stop'] = function(block){
 Blockly.Python['inter_init'] = function(block){
 	Blockly.Python.definitions_['import_machine'] = 'import machine';
 
-	var value_nome = Blockly.Python.valueToCode(block, 'Nome', Blockly.Python.ORDER_ATOMIC);
-	var value_handler = Blockly.Python.valueToCode(block, 'Função', Blockly.Python.ORDER_ATOMIC);
-	var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
+	var value_nome = Blockly.Python.valueToCode(block, 'Name', Blockly.Python.ORDER_ATOMIC);
+	var value_handler = Blockly.Python.valueToCode(block, 'Function', Blockly.Python.ORDER_ATOMIC);
+	var value_pin = Blockly.Python.valueToCode(block, 'Pin', Blockly.Python.ORDER_ATOMIC);
 
 	var code = ''+value_nome.replace('\'','').replace('\'','')+'=machine.Pin('+value_pin+', machine.Pin.IN, machine.Pin.PULL_UP) \n'+value_nome.replace('\'','').replace('\'','')+'.irq(trigger=machine.Pin.IRQ_FALLING, handler='+ value_handler.replace('\'','').replace('\'','')+')\n';
 	return code;

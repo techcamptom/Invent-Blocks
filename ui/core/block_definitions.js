@@ -12008,19 +12008,19 @@ Blockly.Blocks['inter_init'] = {
         55,
         55,
         "*"))
-        .appendField("Iniciar Interrupção");
-    this.appendValueInput("Nome")
+        .appendField("Initialise Interrupt");
+    this.appendValueInput("Name")
         .setCheck("String")
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Nome");
-    this.appendValueInput("Função")
+        .appendField("Name");
+    this.appendValueInput("Function")
         .setCheck("String")
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Função");
-    this.appendValueInput("pin")
+        .appendField("Function");
+    this.appendValueInput("Pin")
         .setCheck("Number")
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(new Blockly.FieldLabelSerializable("pin"), "INTERRUPT_PIN");
+        .appendField(new Blockly.FieldLabelSerializable("Pin"), "INTERRUPT_PIN");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(240);

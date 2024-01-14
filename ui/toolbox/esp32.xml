@@ -405,7 +405,7 @@
     <category name="%{BKY_CATFUNCTIONS}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
 
     <sep></sep>
-   <category name="BIPES">
+   <category name="IOT">
     <block type="project_metadata">
       <value name="project_author">
         <shadow type="text">
@@ -466,17 +466,17 @@
     </block>
 
   <block type="inter_init">
-      <value name="Nome">
+      <value name="Name">
         <shadow type="text">
           <field name="TEXT"></field>
         </shadow>
       </value>
-      <value name="Função">
+      <value name="Function">
         <shadow type="text">
           <field name="TEXT"></field>
         </shadow>
       </value>
-      <value name="pin">
+      <value name="Pin">
         <shadow type="pinout">
           <field name="PIN"></field>
         </shadow>
@@ -649,7 +649,7 @@
 </category>
 
 
-<category name="%{BKY_CAT_DISPLAYS}">
+<category name="%{BKY_CAT_DISPLAYS}" hidden="true">
 
 <category name="%{BKY_CAT_NEO}">
       <label text="NeoPixel RGB LED Strip"></label>
@@ -1150,7 +1150,7 @@
 
   </category>
 
-  <category name="%{BKY_CAT_SENSORS}">
+  <category name="%{BKY_CAT_SENSORS}" hidden="true">
 
     <category name="%{BKY_CAT_TEMP_HUMI}">
       <label text="DHT11/22 Temperature and Humidity Sensor"></label>
@@ -1553,7 +1553,7 @@
   </category>
   </category>
 
-  <category name="%{BKY_CAT_OUTPUTS}">
+  <category name="%{BKY_CAT_OUTPUTS}" hidden="true">
     <category name="%{BKY_CAT_RELAY}">
       <label text="%{BKY_CAT_RELAY}"></label>
       <block type="relay_switch">
@@ -1818,7 +1818,7 @@ _
 
       </category>
 
-      <category name="GSM Modem">
+      <category name="GSM Modem" hidden="true">
 
       <block type="gsm_modem_init">
 </block>
@@ -1957,76 +1957,8 @@ _
       </value>
 </block>
 
-      <label text="SD Card"></label>
-
-    <block type="sd_mount">
-      <value name="pIn">
-        <shadow type="text">
-		<field name="TEXT">/sd</field>
-        </shadow>
-      </value>
-    </block>
-
-    <block type="sd_mount_custom">
-      <value name="slot">
-        <shadow type="math_number">
-          <field name="NUM">2</field>
-        </shadow>
-      </value>
-      <value name="sck">
-        <shadow type="math_number">
-          <field name="NUM">18</field>
-        </shadow>
-      </value>
-      <value name="miso">
-        <shadow type="math_number">
-          <field name="NUM">19</field>
-        </shadow>
-      </value>
-      <value name="mosi">
-        <shadow type="math_number">
-          <field name="NUM">23</field>
-        </shadow>
-      </value>
-      <value name="cs">
-        <shadow type="math_number">
-          <field name="NUM">15</field>
-        </shadow>
-      </value>
-      <value name="freq">
-        <shadow type="math_number">
-          <field name="NUM">20000000</field>
-        </shadow>
-      </value>
-      <value name="pIn">
-        <shadow type="text">
-		<field name="TEXT">/sd</field>
-        </shadow>
-      </value>
-    </block>
-
-
-<block type="uos_listdir">
-  <value name="pIn">
-        <shadow type="text">
-		<field name="TEXT">/sd</field>
-        </shadow>
-      </value>
-</block>
-
-<block type="uos_umount">
-  <value name="pIn">
-        <shadow type="text">
-		<field name="TEXT">/sd</field>
-        </shadow>
-      </value>
-</block>
-
-      <label text="Other file operations"></label>
-
 <block type="uos_listdir">
 </block>
-
 
 <block type="uos_uname"> </block>
 <block type="uos_urandom">
@@ -2625,7 +2557,7 @@ _
  
 
 
-<category name="%{BKY_CAT_CONTROL}">
+<category name="%{BKY_CAT_CONTROL}" hidden="true">
   <category name="PID">
     <button text="Install control library" callbackKey="installPyLib"></button>
     <label text="Proportional–integral–derivative Controller"></label>
@@ -2690,7 +2622,7 @@ _
   </category>
 </category>
 
-<category name="micropython">
+<category name="micropython" hidden="true">
 <category name="btree">
 <block type="btree_open">
 </block>
