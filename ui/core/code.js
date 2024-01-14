@@ -573,7 +573,7 @@ Code.init = function() {
 
 
   Code.bindClick('forumButton',
-    function () {window.open("https://github.com/BIPES/BIPES/discussions",'_blank')}
+    function () {window.open("https://www.inventblocks.com",'_blank')}
   )
 
 
