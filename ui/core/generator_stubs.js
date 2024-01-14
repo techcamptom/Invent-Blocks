@@ -67,6 +67,19 @@ Blockly.Python['invent_LED'] = function(block) {
 	var code = `np[${value_address}]=${value_color}\nnp.write()\n`;
 	return code;
 };
+Blockly.Python['invent_espnowinit'] = function(block) {
+	return 'espinit()\n';
+};
+Blockly.Python['invent_espnowaddpeer'] = function(block) {
+	var value_peer = block.getFieldValue('PEER');
+	return `espaddpeer("${value_peer}")\n`;
+};
+Blockly.Python['invent_espnowrcv'] = function(block) {
+	return ['esprcv()', Blockly.JavaScript.ORDER_NONE]; 
+};
+Blockly.Python['invent_espnowavail'] = function(block) {
+	return ['espavail()', Blockly.JavaScript.ORDER_NONE]; 
+};
 	
 Blockly.Python['project_metadata'] = function(block) {
   var value_project_author = Blockly.Python.valueToCode(block, 'project_author', Blockly.Python.ORDER_ATOMIC);

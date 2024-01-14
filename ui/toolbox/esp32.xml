@@ -2003,6 +2003,18 @@ _
 
 
   <category name="%{BKY_CAT_NET}">
+    <category name="ESPNow">
+      <block type="invent_espnowinit"></block>
+      <block type="invent_espnowaddpeer">
+        <value name="PEER">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="invent_espnowrcv"></block>
+      <block type="invent_espnowavail"></block>
+    </category>
     <block type="wifi_client_connect">
       <value name="wifi_client_essid">
         <shadow type="text">

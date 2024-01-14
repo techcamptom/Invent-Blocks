@@ -1,7 +1,7 @@
 Blockly.Blocks['invent_initialise'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Invent! Start");
+        .appendField("Invent! start");
     this.setNextStatement(true, null);
     this.setColour(10);
  this.setTooltip("");
@@ -123,11 +123,11 @@ Blockly.Blocks['invent_LED'] = {
 
     this.appendValueInput("address")
         .setCheck(null)
-	.appendField("Num");
+	.appendField("num");
 
     this.appendValueInput("color")
         .setCheck("Number")
-	  .appendField(MSG["color"]);
+	  .appendField("color");
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -182,6 +182,49 @@ Blockly.Blocks['invent_color'] = {
     this.setColour(10);
  this.setTooltip(MSG["np_color_tooltip_picker"]);
  this.setHelpUrl("https://bipes.net.br/wp/?page_id=177");
+  }
+};
+Blockly.Blocks['invent_espnowinit'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("ESPNow init");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['invent_espnowaddpeer'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("ESPNow add peer")
+        .appendField(new Blockly.FieldTextInput("E89F6D09722C"), "PEER");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['invent_espnowrcv'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("ESPNow rcv");
+    this.setOutput(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['invent_espnowavail'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("ESPNow data available");
+    this.setOutput(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
   }
 };
 
