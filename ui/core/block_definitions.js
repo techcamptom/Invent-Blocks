@@ -1,8 +1,7 @@
 Blockly.Blocks['invent_initialise'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Invent! Initialise");
-    this.setPreviousStatement(true, null);
+        .appendField("Invent! Start");
     this.setNextStatement(true, null);
     this.setColour(10);
  this.setTooltip("");
@@ -117,17 +116,72 @@ Blockly.Blocks['invent_gamepad'] = {
  this.setHelpUrl("");
   }
 };
-Blockly.Blocks['invent_inbuilt_led'] = {
+Blockly.Blocks['invent_LED'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Inbuilt LED")
-        .appendField(new Blockly.FieldColour("#ff0000"), "value");
+        .appendField("LED");
+
+    this.appendValueInput("address")
+        .setCheck(null)
+	.appendField("Num");
+
+    this.appendValueInput("color")
+        .setCheck("Number")
+	  .appendField(MSG["color"]);
+
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+
     this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
     this.setColour(10);
- this.setTooltip("");
- this.setHelpUrl("");
+ this.setTooltip(MSG["np_controll_tooltip"]);
+ this.setHelpUrl("http://www.bipes.net.br");
+  }
+};
+function componentToHex(c) {
+  var hex =  parseInt(c).toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+Blockly.Blocks['invent_colorRGB'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(MSG["red"]);
+    this.appendValueInput("red")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField(MSG["green"]);
+    this.appendValueInput("green")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField(MSG["blue"]);
+    this.appendValueInput("blue")
+        .setCheck(null);
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(10);
+    this.setTooltip(MSG["np_color_tooltip_rgb"]);
+    this.setHelpUrl("https://bipes.net.br/wp/?page_id=177");
+  },
+  styleBlock: function(colours) {
+    colours = colours.map(x => parseInt(x))
+    colours = colours.includes(NaN) ? [89,102,166] : colours
+    if(colours.every((e) => {return e <= 255}) && colours.every((e) => {return e >= 0})) {
+      let hex_ = Tool.RGB2HEX (colours [0], colours [1], colours [2]);
+      this.setColour(hex_);
+    } else
+      this.setColour("#FF0000");
+  }
+};
+Blockly.Blocks['invent_color'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(MSG["color"])
+        .appendField(new Blockly.FieldColour("#ff0000"), "color");
+    this.setInputsInline(true);
+    this.setOutput(true, null);
+    this.setColour(10);
+ this.setTooltip(MSG["np_color_tooltip_picker"]);
+ this.setHelpUrl("https://bipes.net.br/wp/?page_id=177");
   }
 };
 

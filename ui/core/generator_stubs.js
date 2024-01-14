@@ -46,7 +46,28 @@ Blockly.Python['invent_sensor'] = function(block) {
 Blockly.Python['invent_gamepad'] = function(block) {
 	return ['getgamepadbuttons()',Blockly.JavaScript.ORDER_NONE];
 };
-  
+Blockly.Python['invent_colorRGB'] = function(block) {
+	var value_red = Blockly.Python.valueToCode(block, 'red', Blockly.Python.ORDER_ATOMIC);
+	var value_green = Blockly.Python.valueToCode(block, 'green', Blockly.Python.ORDER_ATOMIC);
+	var value_blue = Blockly.Python.valueToCode(block, 'blue', Blockly.Python.ORDER_ATOMIC);
+  	// Style block with compiled values, see block_definitions.js
+	this.styleBlock([value_red, value_green, value_blue])
+  	var code = `(${value_red},${value_green},${value_blue})`;
+  	return [code, Blockly.Python.ORDER_NONE];
+};
+Blockly.Python['invent_color'] = function(block) {
+	var color = block.getFieldValue('color');
+	var h = Tool.HEX2RGB(color);
+	var code = `(${h.r},${h.g},${h.b})`;
+	return [code, Blockly.Python.ORDER_NONE];
+};
+Blockly.Python['invent_LED'] = function(block) {
+	var value_address = Blockly.Python.valueToCode(block, 'address', Blockly.Python.ORDER_NONE);
+	var value_color = Blockly.Python.valueToCode(block, 'color', Blockly.Python.ORDER_NONE);
+	var code = `np[${value_address}]=${value_color}\nnp.write()\n`;
+	return code;
+};
+	
 Blockly.Python['project_metadata'] = function(block) {
   var value_project_author = Blockly.Python.valueToCode(block, 'project_author', Blockly.Python.ORDER_ATOMIC);
   var value_project_iot_id = Blockly.Python.valueToCode(block, 'project_iot_id', Blockly.Python.ORDER_ATOMIC);
