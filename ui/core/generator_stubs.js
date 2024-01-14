@@ -6093,17 +6093,15 @@ Blockly.Python["esp32_cam_white_led"] = function(block) {
 };
 
 Blockly.Python["rtttl_play"] = function(block) {
-	var pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 	var song = Blockly.Python.valueToCode(block, 'song', Blockly.Python.ORDER_ATOMIC);
 	Blockly.Python.definitions_['import_pin'] = 'from machine import Pin';
 	Blockly.Python.definitions_['import_rtttl'] = 'import rtttl, songs';
 
-	var code = 'play = rtttl.play(Pin(' + pin + '), songs.find(' + song + ')) \n';
+	var code = 'play = rtttl.play(Pin(25), songs.find(' + song + ')) \n';
 	return code;
 };
 
 Blockly.Python['tone'] = function(block) {
-	var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 	var value_frequency = Blockly.Python.valueToCode(block, 'frequency', Blockly.Python.ORDER_ATOMIC);
 	var d = Blockly.Python.valueToCode(block, 'duration', Blockly.Python.ORDER_ATOMIC);
 
@@ -6111,41 +6109,37 @@ Blockly.Python['tone'] = function(block) {
 	Blockly.Python.definitions_['import_pwm'] = 'from machine import PWM';
   	Blockly.Python.definitions_['import_time'] = 'import time';
   	
-	var x = value_pin.replace('(','').replace(')','');
 
-	var code = 'pwm' + x + ' = PWM(Pin(' + x + '))\n';
-	code += 'pwm' + x + '.freq(' + value_frequency + ')\n';
-	code += 'pwm' + x + '.duty_u16(512)\n';
+	var code = 'pwmout = PWM(Pin(25))\n';
+	code += 'pwmout.freq(' + value_frequency + ')\n';
+	code += 'pwmout.duty_u16(512)\n';
 	
 	var d1=parseFloat(d);
 	if (d1==0)
 		code += '';
 	else
-		code += 'time.sleep(' + d + ')\npwm' + x + '.deinit()\n';
+		code += 'time.sleep(' + d + ')\npwmout.deinit()\n';
 
 	return code;
   };
 
 
 Blockly.Python['note'] = function(block) {
-	var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
 	var value_frequency = Blockly.Python.valueToCode(block, 'note', Blockly.Python.ORDER_ATOMIC);
 	var d = Blockly.Python.valueToCode(block, 'duration', Blockly.Python.ORDER_ATOMIC);
 
 	Blockly.Python.definitions_['import_pin'] = 'from machine import Pin';
 	Blockly.Python.definitions_['import_pwm'] = 'from machine import PWM';
-  Blockly.Python.definitions_['import_time'] = 'import time';
+    Blockly.Python.definitions_['import_time'] = 'import time';
   	
-	var x = value_pin.replace('(','').replace(')','');
-
-	var code = 'pwm' + x + ' = PWM(Pin(' + x + '))\n';
-	code += 'pwm' + x + '.freq(' + value_frequency + ')\n';
-	code += 'pwm' + x + '.duty_u16(512)\n';
+	var code = 'pwmout = PWM(Pin(25))\n';
+	code += 'pwmout.freq(' + value_frequency + ')\n';
+	code += 'pwmout.duty_u16(512)\n';
 	var d1=parseFloat(d);
 	if (d1==0)
 		code += '';
 	else
-		code += 'time.sleep(' + d + ')\npwm' + x + '.deinit()\n';
+		code += 'time.sleep(' + d + ')\npwmout.deinit()\n';
 
 	return code;
   };

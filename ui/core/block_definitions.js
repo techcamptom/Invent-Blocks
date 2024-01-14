@@ -11674,9 +11674,6 @@ Blockly.Blocks['tone'] = {
     this.appendDummyInput()
         .appendField(MSG["sound_tone"]);
 
-    this.appendValueInput("pin")
-        .setCheck(null)
-	.appendField(MSG["pin"]);
     this.appendValueInput("frequency")
         .setCheck("Number")
 	  .appendField(MSG["frequency"]);
@@ -11701,10 +11698,6 @@ Blockly.Blocks['note'] = {
   init: function(){
     this.appendDummyInput()
         .appendField(MSG["sound_note"]);
-    this.appendValueInput("pin")
-        .setCheck(null)
-	.appendField(MSG["pin"]);
-
     this.appendValueInput("note")
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(MSG["note"]);
@@ -11730,10 +11723,6 @@ Blockly.Blocks['rtttl_play'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(MSG["rtttl_play"]);
-
-    this.appendValueInput("pin")
-        .setCheck(null)
-	.appendField(MSG["pin"]);
 
     this.appendValueInput("song")
         .setAlign(Blockly.ALIGN_RIGHT)
