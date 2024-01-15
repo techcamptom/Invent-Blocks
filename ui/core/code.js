@@ -783,6 +783,7 @@ print('Install done.')
 
   // Lazy-load the syntax-highlighting.
   window.setTimeout(Code.importPrettify, 1);
+  Blockly.HSV_SATURATION=0.65;
 };
 
 function loadDoc() {
