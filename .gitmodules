@@ -9,5 +9,5 @@
 	url = git@github.com:BIPES/databoard.git
 [submodule "webrepl"]
 	path = webrepl
-	url = https://github.com/BIPES/SocketServerWebREPL
+	url = https://github.com/micropython/webrepl
 
