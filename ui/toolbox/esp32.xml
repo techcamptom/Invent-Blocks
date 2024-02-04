@@ -6,6 +6,8 @@
           <label text="Library: "></label>
           <button text="Install rtttl library" callbackKey="installPyLib"></button>
           <button text="Install songs library" callbackKey="installPyLib"></button>
+          <button text="Load example: songs" callbackKey="loadExample"></button>
+          <button text="Documentation and how to connect: sound" callbackKey="loadDoc"></button>
       <block type="tone"> 
       <value name="frequency">
           <shadow type="math_number">
@@ -68,6 +70,7 @@
       <block type="text"> <field name="TEXT">LeisureSuit</field> </block>
       <block type="text"> <field name="TEXT">MissionImp</field> </block>
     </category>
+      <block type="invent_initialise"></block>
       <block type="invent_move">
         <value name="DISTANCE">
           <shadow type="math_number">
@@ -76,8 +79,18 @@
         </value>
       </block>
       <block type="invent_turn">
+        <value name="DEGREES">
+          <shadow type="math_number">
+            <field name="NUM">45</field>
+          </shadow>
+        </value>
       </block>
       <block type="invent_spin">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
       </block>
       <block type="invent_speed">
         <value name="SPEED">
@@ -90,17 +103,19 @@
       </block>
       <block type="invent_moving">
       </block>
-      <block type="invent_button">
-      </block>
       <block type="invent_sensor">
-      </block>
-      <block type="invent_linesensor">
       </block>
       <block type="invent_gamepad">
       </block>
       <block type="invent_LED">
+       <value name="address">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+       </value>
        <value name="color">
         <shadow type="invent_color">
+          <field name="PIN"></field>
         </shadow>
        </value>
       </block>
