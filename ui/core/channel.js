@@ -45,12 +45,9 @@ class mux {
       this.connect ();
 
       } else if (this.ifunavailable [channel_] != undefined) {
-        let msg = `The channel ${channel_} is not yet available in this version, but at ${this.ifunavailable [channel_] [1]}, would you like to be redirected there?`;
-        if (confirm(msg)) {
-          window.location.assign(this.ifunavailable [channel_] [0]);
-        } else {
-          UI ['channel-panel'].button.className = `icon ${this.currentChannel}`
-        }
+        let msg = `The channel ${channel_} is not yet available in this version, but at ${this.ifunavailable [channel_] [0]}`;
+        confirm(msg)
+        UI ['channel-panel'].button.className = `icon ${this.currentChannel}`
     } else {
       alert(`The channel ${channel_} is not yet available in this version.`);
     }
