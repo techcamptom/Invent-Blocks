@@ -30,7 +30,7 @@ class mux {
 
     this.ifunavailable = {
       webserial: ['https://code.inventblocks.com/ui', 'the HTTPS version'],
-      websocket: ['http://finecoolsplendidbirds.neverssl.com/online/', 'the HTTP version'],
+      websocket: ['http://code.inventblocks.com/ui', 'the HTTP version'],
       webbluetooth: ['https://code.inventblocks.com/ui', 'the HTTPS version']
     }
   }
