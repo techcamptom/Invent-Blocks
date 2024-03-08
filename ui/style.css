@@ -196,6 +196,9 @@ h1 {
 .channel-panel #url, .channel-panel #password {
   border-bottom: 1px solid #ccc;
 }
+#passworddiv {
+  display:none;
+}
 .channel-panel #url {
   margin-bottom: 1rem;
 }
@@ -208,7 +211,7 @@ h1 {
   align-items: center;
 }
 #bluetoothButton{
-//  display: none;
+  display: none;
 }
 .channel-panel .icon:before{
   margin-right: .25rem;
