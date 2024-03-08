@@ -204,6 +204,10 @@ class websocket {
    * @param {string} pass - password to connect to the device
    */
   connect (url, pass) {
+    if (url=='')
+      url='192.168.4.1';
+    else if (url.length==6) // This will be a 6-char truncated MAC code so add 'Invent' before as this will be it's host name on the network
+      url='Invent'+url;
     url = 'ws://'+url+':8266/';
     UI ['workspace'].connecting ();
     this.ws = new WebSocket(url);
