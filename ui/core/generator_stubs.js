@@ -98,7 +98,13 @@ Blockly.Python['invent_espnowavail'] = function(block) {
 	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
 	return ['espavail()', Blockly.JavaScript.ORDER_NONE]; 
 };
-	
+Blockly.Python['invent_espnowsend'] = function(block) {
+	var value_data = Blockly.Python.valueToCode(block, 'data', Blockly.Python.ORDER_ATOMIC);
+	var code = `espsend(${value_data})\n`;
+	return code;
+};
+
+
 Blockly.Python['project_metadata'] = function(block) {
   var value_project_author = Blockly.Python.valueToCode(block, 'project_author', Blockly.Python.ORDER_ATOMIC);
   var value_project_iot_id = Blockly.Python.valueToCode(block, 'project_iot_id', Blockly.Python.ORDER_ATOMIC);

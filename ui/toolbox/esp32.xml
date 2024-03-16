@@ -1999,6 +1999,13 @@ _
       </block>
       <block type="invent_espnowrcv"></block>
       <block type="invent_espnowavail"></block>
+      <block type="invent_espnowsend"> 
+        <value name="data">
+            <shadow type="text">
+              <field name="TEXT">Hello</field>
+            </shadow>
+        </value>
+      </block>
     </category>
     <block type="wifi_client_connect">
       <value name="wifi_client_essid">

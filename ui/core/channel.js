@@ -339,7 +339,7 @@ class websocket {
   }
 }
 
-/*Handles the websocket protocol*/
+/*Handles the webserial protocol*/
 class webserial {
 	/**
    * Init the webserial, stored as Channel.websocket

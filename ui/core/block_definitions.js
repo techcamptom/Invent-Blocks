@@ -235,6 +235,21 @@ Blockly.Blocks['invent_espnowavail'] = {
  this.setHelpUrl("");
   }
 };
+Blockly.Blocks['invent_espnowsend'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("ESPNow send");
+    this.appendValueInput("data")
+        .setCheck("String")
+        .appendField("data");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
 Blockly.Blocks['pwm'] = {
   init: function(){
