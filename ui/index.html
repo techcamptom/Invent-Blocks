@@ -171,7 +171,7 @@ document.body.appendChild(el);
 
   <div class='channel-panel'>
     <button class='icon' id="bluetoothButton">Bluetooth</button>
-    <div>
+    <div id="serialDiv">
       <button class='icon' id="serialButton">Serial</button>
       <label for="resetBoard" class="checkswitch">
         Reset on connect
@@ -179,7 +179,7 @@ document.body.appendChild(el);
         <span></span>
       </label>
     </div>
-    <div>
+    <div id="networkDiv">
       <button class='icon' id="networkButton">Network</button>
       <span>
       Address: <input type="text" name="webrepl_url" id="url" value="" />

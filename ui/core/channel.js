@@ -17,16 +17,20 @@ class mux {
         case 'https:':
           this.available = ['webserial', 'webbluetooth'];
           this.currentChannel = 'webserial';
+          var x = document.getElementById("networkDiv");
+          x.style.display = "none";
         break;
         case 'http:':
           this.available = ['websocket'];
           this.currentChannel = 'websocket';
+          var x = document.getElementById("serialDiv");
+          x.style.display = "none";
         break;
       }
     } else {
       this.available = ['webserial', 'websocket', 'webbluetooth'];
       this.currentChannel = 'webserial';
-    }
+}
 
     this.ifunavailable = {
       webserial: ['https://code.inventblocks.com/ui', 'the HTTPS version'],
