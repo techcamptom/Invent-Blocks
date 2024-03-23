@@ -146,6 +146,26 @@ Blockly.Blocks['invent_LED'] = {
  this.setHelpUrl("http://www.bipes.net.br");
   }
 };
+Blockly.Blocks['invent_obstacleLED'] = {
+  init: function() {
+    this.appendValueInput("LEDnum")
+        .setCheck("Number")
+        .appendField("Obstacle LED");
+    this.appendValueInput("color")
+        .setCheck("Number")
+	      .appendField("color");
+
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+
+    this.setInputsInline(true);
+    this.setColour(10);
+    this.setTooltip(MSG["np_controll_tooltip"]);
+    this.setHelpUrl("http://www.bipes.net.br");
+  }
+};
+
+
 function componentToHex(c) {
   var hex =  parseInt(c).toString(16);
   return hex.length == 1 ? "0" + hex : hex;
@@ -11799,6 +11819,20 @@ Blockly.Blocks['rtttl_play'] = {
     this.setColour(230);
  this.setTooltip("Control ESP32-CAM White LED (flashlight)");
  this.setHelpUrl("bipes.net.br");
+  }
+};
+
+Blockly.Blocks['invent_wavplay'] = {
+  init: function() {
+    this.appendValueInput("fname")
+        .setCheck("String")
+        .appendField("Play WAV");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
   }
 };
 

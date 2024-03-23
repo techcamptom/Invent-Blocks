@@ -38,6 +38,13 @@
           </shadow>
         </value>
       </block>
+      <block type="invent_wavplay"> 
+        <value name="fname">
+            <shadow type="text">
+              <field name="TEXT">sound.wav</field>
+            </shadow>
+        </value>
+      </block>
       <label text="Songs:"></label>
       <button text="Install songs library" callbackKey="installPyLib"></button>
       <block type="text"> <field name="TEXT">Super Mario - Main Theme</field> </block>
@@ -99,6 +106,17 @@
       <block type="invent_gamepad">
       </block>
       <block type="invent_LED">
+       <value name="color">
+        <shadow type="invent_color">
+        </shadow>
+       </value>
+      </block>
+      <block type="invent_obstacleLED">
+       <value name="LEDnum">
+         <shadow type="math_number">
+           <field name="NUM">1</field>
+         </shadow>
+       </value>
        <value name="color">
         <shadow type="invent_color">
         </shadow>

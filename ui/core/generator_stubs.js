@@ -81,6 +81,20 @@ Blockly.Python['invent_LED'] = function(block) {
 	var code = `np[${value_channel}]=${value_color}\nnp.write()\n`;
 	return code;
 };
+Blockly.Python['invent_obstacleLED'] = function(block) {
+	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	var value_LEDnum = Blockly.Python.valueToCode(block, 'LEDnum', Blockly.Python.ORDER_ATOMIC);
+	var value_color = Blockly.Python.valueToCode(block, 'color', Blockly.Python.ORDER_NONE);
+	var code = `facenp[${value_LEDnum}]=${value_color}\nfacenp.write()\n`;
+	return code;
+};
+Blockly.Python['invent_speed'] = function(block) {
+	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	var value_speed = Blockly.Python.valueToCode(block, 'SPEED', Blockly.Python.ORDER_ATOMIC);
+	var code = `speed(${value_speed})\n`;
+	return code;
+};
+
 Blockly.Python['invent_espnowinit'] = function(block) {
 	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
 	return 'espinit()\n';
@@ -101,6 +115,12 @@ Blockly.Python['invent_espnowavail'] = function(block) {
 Blockly.Python['invent_espnowsend'] = function(block) {
 	var value_data = Blockly.Python.valueToCode(block, 'data', Blockly.Python.ORDER_ATOMIC);
 	var code = `espsend(${value_data})\n`;
+	return code;
+};
+Blockly.Python['invent_wavplay'] = function(block) {
+	Blockly.Python.definitions_['import_wavplay'] = 'from wavplay import *';
+	var value_fname = Blockly.Python.valueToCode(block, 'fname', Blockly.Python.ORDER_ATOMIC);
+	var code = `wavplay(${value_fname})\n`;
 	return code;
 };
 
