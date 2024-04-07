@@ -3,7 +3,7 @@ FILES_BLOCKLY1=blockly_compressed.js blocks_compressed.js javascript_compressed.
 FILES_WEBREPL=FileSaver.js term.js
 
 git-clone:
-	git clone https://github.com/google/blockly.git
+	git clone https://github.com/JamesHarcourt7/blockly-techcamp.git
 	git clone https://github.com/micropython/webrepl.git
 
 copy:
