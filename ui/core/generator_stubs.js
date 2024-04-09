@@ -102,7 +102,7 @@ Blockly.Python['invent_espnowinit'] = function(block) {
 Blockly.Python['invent_espnowaddpeer'] = function(block) {
 	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
 	var value_peer = block.getFieldValue('PEER');
-	return `espaddpeer("${value_peer}")\n`;
+	return `try:\n  espaddpeer("${value_peer}")\nexcept:\n  pass\n`;
 };
 Blockly.Python['invent_espnowrcv'] = function(block) {
 	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
