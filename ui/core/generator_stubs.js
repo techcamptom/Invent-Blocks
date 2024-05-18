@@ -6154,7 +6154,7 @@ Blockly.Python["rtttl_play"] = function(block) {
 	Blockly.Python.definitions_['import_pin'] = 'from machine import Pin';
 	Blockly.Python.definitions_['import_rtttl'] = 'import rtttl, songs';
 
-	var code = 'play = rtttl.play(Pin(25), songs.find(' + song + ')) \n';
+	var code = 'play = rtttl.play(Pin(25, mode=Pin.OUT), songs.find(' + song + ')) \n';
 	return code;
 };
 
@@ -6167,7 +6167,7 @@ Blockly.Python['tone'] = function(block) {
   	Blockly.Python.definitions_['import_time'] = 'import time';
   	
 
-	var code = 'pwmout = PWM(Pin(25))\n';
+	var code = 'pwmout = PWM(Pin(25, mode=Pin.OUT))\n';
 	code += 'pwmout.freq(' + value_frequency + ')\n';
 	code += 'pwmout.duty_u16(512)\n';
 	
@@ -6189,7 +6189,7 @@ Blockly.Python['note'] = function(block) {
 	Blockly.Python.definitions_['import_pwm'] = 'from machine import PWM';
     Blockly.Python.definitions_['import_time'] = 'import time';
   	
-	var code = 'pwmout = PWM(Pin(25))\n';
+	var code = 'pwmout = PWM(Pin(25, mode=Pin.OUT))\n';
 	code += 'pwmout.freq(' + value_frequency + ')\n';
 	code += 'pwmout.duty_u16(512)\n';
 	var d1=parseFloat(d);
