@@ -649,7 +649,7 @@
 </category>
 
 
-<category name="%{BKY_CAT_DISPLAYS}" hidden="true">
+<category name="%{BKY_CAT_DISPLAYS}" hidden="false">
 
 <category name="%{BKY_CAT_NEO}">
       <label text="NeoPixel RGB LED Strip"></label>
@@ -757,7 +757,7 @@
 
 
 
-  <category name="%{BKY_CAT_CHAR_DISP}">
+  <category name="%{BKY_CAT_CHAR_DISP}" hidden="true">
       <label text="PCF8574 Display controller"></label>
 
       <label text="Library: https://github.com/dhylands/python_lcd"></label>
@@ -799,7 +799,7 @@
 
   </category>
 
-    <category name="ST7789 Display">
+    <category name="ST7789 Display" hidden="true">
       <label text="ST7789 Display"></label>
       <label text="Library: https://github.com/devbis/st7789py_mpy"></label>
       <button text="Install st7789py library" callbackKey="installPyLib"></button>
@@ -1025,7 +1025,7 @@
 
     </category>
 
-  <category name="LED Matrix">
+  <category name="LED Matrix" hidden="true">
       <label text="TM1640 LED Matrix"></label>
       <label text="Library: https://github.com/mcauser/micropython-tm1640"></label>
         <button text="Install tm1640 library" callbackKey="installPyLib"></button>
@@ -1150,7 +1150,7 @@
 
   </category>
 
-  <category name="%{BKY_CAT_SENSORS}" hidden="true">
+  <category name="%{BKY_CAT_SENSORS}">
 
     <category name="%{BKY_CAT_TEMP_HUMI}">
       <label text="DHT11/22 Temperature and Humidity Sensor"></label>
@@ -1188,7 +1188,7 @@
 
 
 <!--Adicionando os blocos do Anenmômetro-->
-    <category name="Anemômetro">
+    <category name="Anemômetro" hidden="true">
     <label text="Anenômetro"></label>
 <!--Iniciar Anemômetro-->
     <block type="anemo_init">
@@ -1213,7 +1213,7 @@
       </block>
   </category>
 <!--Adicionando os blocos do Pluviômetro--> 
-  <category name="Pluviômetro">
+  <category name="Pluviômetro" hidden="true">
     <label text= "Pluviômetro"></label>
 <!--Iniciar Pluviômetro-->
     <block type="pluvio_init">
@@ -1369,7 +1369,7 @@
 
   </category>
 
-  <category name="%{BKY_CAT_AIR}">
+  <category name="%{BKY_CAT_AIR}" hidden="true">
       <label text="CCS811"></label>
    <label text="Library: https://github.com/Notthemarsian/CCS811"></label>
         <button text="Install CCS811 library" callbackKey="installPyLib"></button>
@@ -1445,7 +1445,7 @@
 
   </category>
 
-      <category name="OneWire">
+      <category name="OneWire" hidden="true">
       <label text="OneWire"></label>
 
         <button text="Load example: ds1820" callbackKey="loadExample"></button>
@@ -1518,8 +1518,8 @@
   </category>
 
 
-  <category name="Rotatory Encoder">
-      <label text="Rotatory Incremental Encoder"></label>
+  <category name="Rotatry Encoder">
+      <label text="Rotatry Incremental Encoder"></label>
         <button text="Load example: encoder" callbackKey="loadExample"></button>
         <button text="Documentation and how to connect: encoder" callbackKey="loadDoc"></button>
 
@@ -1541,7 +1541,7 @@
       <block type="encoder_read"></block>
   </category>
 
-  <category name="Camera (ESP32CAM)">
+  <category name="Camera (ESP32CAM)" hidden="true">
       <label text="OV2640 Camera on ESP32-CAM Board"></label>
         <button text="Load example: esp32cam" callbackKey="loadExample"></button>
       <label text="More info: https://rafaelaroca.wordpress.com/2021/07/15/esp32-camera-micropython-and-no-esptool/"></label>
@@ -1553,8 +1553,8 @@
   </category>
   </category>
 
-  <category name="%{BKY_CAT_OUTPUTS}" hidden="true">
-    <category name="%{BKY_CAT_RELAY}">
+  <category name="%{BKY_CAT_OUTPUTS}">
+    <category name="%{BKY_CAT_RELAY}" hidden="true">
       <label text="%{BKY_CAT_RELAY}"></label>
       <block type="relay_switch">
         <value name="pin">
@@ -1565,7 +1565,7 @@
       </block>
     </category>
 
-    <category name="I/O Expander">
+    <category name="I/O Expander" hidden="true">
 	    <label text="I/O Expander"></label>
 	    <label text="MCP23017"></label>
             <button text="Install mcp23017 library" callbackKey="installPyLib"></button>
@@ -1612,7 +1612,7 @@
   </category>
 
 
-  <category name="%{BKY_CAT_STEPPER}">
+  <category name="%{BKY_CAT_STEPPER}" hidden="true">
       <label text="%{BKY_TXT_STEPPER_DESCRIPTION}"></label>
     <block type="stepper_init">
       <value name="p0">
@@ -1687,7 +1687,7 @@ _
     </block>
   </category>
 
-  <category name="Sounds">
+  <category name="Sounds" hidden="true">
         <label text="Sounds and RTTTL:"></label>
         <label text="Ring Tone Text Transfer Language (RTTTL) "></label>
         <label text="Library: "></label>
