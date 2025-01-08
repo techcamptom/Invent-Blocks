@@ -654,7 +654,7 @@
 <category name="%{BKY_CAT_NEO}">
       <label text="NeoPixel RGB LED Strip"></label>
 
-        <button text="Documentation and how to connect: neopixel" callbackKey="loadDoc"></button>
+        <button text="Documentation and how to connsssect: neopixel" callbackKey="loadDoc"></button>
 
       <block type="neopixel_init">
        <value name="pin">
