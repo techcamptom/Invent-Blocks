@@ -5872,21 +5872,12 @@ Blockly.Python['neopixel_control'] = function(block) {
 };
 
 Blockly.Python['neopixel_rotate'] = function(block) {
-	var value_address = Blockly.Python.valueToCode(block, 'address', Blockly.Python.ORDER_NONE);
-	var value_color = Blockly.Python.valueToCode(block, 'color', Blockly.Python.ORDER_NONE);
+	var value_pixels = Blockly.Python.valueToCode(block, 'pixels', Blockly.Python.ORDER_NONE);
   
-	var code = `spi_n[${value_address}]=${value_color}\n`;
+	var code = `spi_n.rotate(${value_pixels})\n`;
   
 	return code;
 };
-  
-  //Blockly.Python['neopixel_rotate'] = function(block) {
-	//var value_pixels = Blockly.Python.valueToCode(block, 'pixels', Blockly.Python.ORDER_NONE);
-  
-	//var code = `spi_n.rotate(${value_pixels})\n`;
-  
-	//return code;
-//};
   
 Blockly.Python['neopixel_write'] = function(block) {
   var code = 'spi_n.write()\n';
