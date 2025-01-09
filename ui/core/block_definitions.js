@@ -1,17 +1,13 @@
 Blockly.Blocks['invent_move'] = {
   init: function() {
-    this.appendValueInput("DISTANCE")
-        .setCheck("Number")
-        .appendField("Move");
-    this.appendDummyInput()
-        .appendField("cm")
-        .appendField(new Blockly.FieldDropdown([["wait","True"], ["no wait","False"]]), "WAIT");
+    this.appendValueInput("DISTANCE").setCheck("Number").appendField("Move");
+    this.appendDummyInput().appendField("cm").appendField(new Blockly.FieldDropdown([["wait","True"], ["no wait","False"]]), "WAIT");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(10);
- this.setTooltip("");
- this.setHelpUrl("");
+    this.setTooltip("");
+    this.setHelpUrl("");
   }
 };
 
@@ -11172,8 +11168,9 @@ Blockly.Blocks['neopixel_init'] = {
     this.setColour(135);
     this.appendDummyInput().appendField(MSG["np_init"]);
     //this.appendDummyInput().appendField(new Blockly.FieldImage("media/neopixel.png",55,55,"*"));
-    this.appendValueInput("pin").setCheck(null).appendField(MSG["pin"]);
+    this.appendValueInput("pin").setCheck(null);
     this.appendValueInput("number").setCheck("Number").appendField(MSG["np_num_leds"]);
+    this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(MSG["np_init_tooltip"]);
@@ -11183,31 +11180,23 @@ Blockly.Blocks['neopixel_init'] = {
 
 Blockly.Blocks['neopixel_control_CPY'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldLabel(MSG["np_controll"]), "MSG_NEOPIXEL");
-
-    this.appendValueInput("pin")
-        .setCheck(null)
-	.appendField(MSG["pin"]);
-
-    this.appendValueInput("color")
-        .setCheck("Number")
-	  .appendField(MSG["color"]);
-
+    this.appendDummyInput().appendField(new Blockly.FieldLabel(MSG["np_controll"]), "MSG_NEOPIXEL");
+    this.appendValueInput("pin").setCheck(null).appendField(MSG["pin"]);
+    this.appendValueInput("color").setCheck("Number").appendField(MSG["color"]);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-
     this.setColour(230);
- this.setTooltip(MSG["np_controll_tooltip"]);
- this.setHelpUrl("http://www.bipes.net.br");
+    this.setTooltip(MSG["np_controll_tooltip"]);
+    this.setHelpUrl("http://www.bipes.net.br");
   }
 }
 
 Blockly.Blocks['neopixel_control'] = {
   init: function() {
     this.appendDummyInput().appendField(new Blockly.FieldLabel(MSG["np_controll"]), "MSG_NEOPIXEL");
-    this.appendValueInput("address").setCheck(null).appendField("LED");
-    this.appendValueInput("color").setCheck("Number").appendField(MSG["color"]);
+    this.appendValueInput("address").setCheck(null);
+    this.appendValueInput("color").setCheck("Number");
+    this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(230);
@@ -11219,7 +11208,9 @@ Blockly.Blocks['neopixel_control'] = {
 Blockly.Blocks['neopixel_rotate'] = {
   init: function() {
     this.appendDummyInput().appendField("Rotate");
-    this.appendValueInput("pixels").setCheck(null).appendField("PIXELS");
+    this.appendValueInput("pixels").setCheck(null);
+    this.appendDummyInput().appendField("pixels");
+    this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(230);
@@ -11246,18 +11237,12 @@ function componentToHex(c) {
 
 Blockly.Blocks['neopixel_color_numbers'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField(MSG["red"]);
-    this.appendValueInput("red")
-        .setCheck(null);
-    this.appendDummyInput()
-        .appendField(MSG["green"]);
-    this.appendValueInput("green")
-        .setCheck(null);
-    this.appendDummyInput()
-        .appendField(MSG["blue"]);
-    this.appendValueInput("blue")
-        .setCheck(null);
+    this.appendDummyInput() .appendField(MSG["red"]);
+    this.appendValueInput("red").setCheck(null);
+    this.appendDummyInput().appendField(MSG["green"]);
+    this.appendValueInput("green").setCheck(null);
+    this.appendDummyInput().appendField(MSG["blue"]);
+    this.appendValueInput("blue").setCheck(null);
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.setColour(230);
