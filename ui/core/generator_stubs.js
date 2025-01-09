@@ -5815,14 +5815,12 @@ Blockly.Python['neopixel_color_numbers'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-
 Blockly.Python['neopixel_color_colors'] = function(block) {
   var color = block.getFieldValue('color');
   var h = Tool.HEX2RGB(color);
   var code = `(${h.r},${h.g},${h.b})`;
   return [code, Blockly.Python.ORDER_NONE];
 };
-
 
 Blockly.Python['HSL_to_RGB'] = function(block) {
   var value_hue = Blockly.Python.valueToCode(block, 'hue', Blockly.Python.ORDER_ATOMIC);
@@ -5838,16 +5836,14 @@ Blockly.Python['HSL_to_RGB'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-
-
 Blockly.Python['neopixel_init'] = function(block) {
-  Blockly.Python.definitions_['import_pin'] = 'from machine import Pin';
-  Blockly.Python.definitions_['import_neopixel'] = 'import neopixel';
+  Blockly.Python.definitions_['import_neospi'] = 'from neoSPI import *';
+  Blockly.Python.definitions_['import_spi'] = 'from machine import SPI';
 
   var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_NONE);
   var value_number = Blockly.Python.valueToCode(block, 'number', Blockly.Python.ORDER_NONE);
 
-  var code = `np=neopixel.NeoPixel(Pin(${value_pin}),${value_number})\n`;
+  var code = `spi1=SPI(1, baudrate=3200000, mosi=Pin(${value_pin}))\nspi_n=NeoPixel(spi1, ${value_number})\n`;
 
   return code;
 };
@@ -5874,13 +5870,13 @@ Blockly.Python['neopixel_control'] = function(block) {
   var value_address = Blockly.Python.valueToCode(block, 'address', Blockly.Python.ORDER_NONE);
   var value_color = Blockly.Python.valueToCode(block, 'color', Blockly.Python.ORDER_NONE);
 
-  var code = `np[${value_address}]=${value_color}\n`;
+  var code = `spi_n[${value_address}]=${value_color}\n`;
 
   return code;
 };
 
 Blockly.Python['neopixel_write'] = function(block) {
-  var code = 'np.write()\n';
+  var code = 'spi_n.write()\n';
   return code;
 };
 

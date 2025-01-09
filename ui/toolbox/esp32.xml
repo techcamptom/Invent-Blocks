@@ -653,16 +653,12 @@
 
 <category name="%{BKY_CAT_NEO}">
       <label text="NeoPixel RGB LED Strip"></label>
-
-        <button text="Documentation and how to connsssect: neopixel" callbackKey="loadDoc"></button>
-
       <block type="neopixel_init">
        <value name="pin">
           <shadow type="pinout">
             <field name="Pin"></field>
           </shadow>
        </value>
-
        <value name="number">
         <shadow type="math_number">
           <field name="NUM">8</field>
@@ -714,7 +710,6 @@
           <field name="NUM">0</field>
         </shadow>
        </value>
-
        <value name="color">
         <shadow type="neopixel_color_colors">
           <field name="PIN"></field>
@@ -728,7 +723,6 @@
           <field name="NUM">0</field>
         </shadow>
        </value>
-
        <value name="color">
         <block type="neopixel_color_numbers">
          <value name="red">

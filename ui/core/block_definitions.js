@@ -11170,24 +11170,10 @@ Blockly.Blocks['stop'] = {
 Blockly.Blocks['neopixel_init'] = {
   init: function() {
     this.setColour(135);
-    this.appendDummyInput()
-        .appendField(MSG["np_init"]);
-
- this.appendDummyInput()
-      .appendField(new Blockly.FieldImage(
-        "media/neopixel.png",
-        55,
-        55,
-        "*"));
-
-    this.appendValueInput("pin")
-        .setCheck(null)
-	.appendField(MSG["pin"]);
-
-    this.appendValueInput("number")
-        .setCheck("Number")
-	  .appendField(MSG["np_num_leds"]);
-
+    this.appendDummyInput().appendField(MSG["np_init"]);
+    //this.appendDummyInput().appendField(new Blockly.FieldImage("media/neopixel.png",55,55,"*"));
+    this.appendValueInput("pin").setCheck(null).appendField(MSG["pin"]);
+    this.appendValueInput("number").setCheck("Number").appendField(MSG["np_num_leds"]);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(MSG["np_init_tooltip"]);
