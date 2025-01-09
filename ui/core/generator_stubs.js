@@ -5875,6 +5875,14 @@ Blockly.Python['neopixel_control'] = function(block) {
   return code;
 };
 
+Blockly.Python['neopixel_rotate'] = function(block) {
+	var value_pixels = Blockly.Python.valueToCode(block, 'pixels', Blockly.Python.ORDER_NONE);
+  
+	var code = `spi_n.rotate(${value_pixels})\n`;
+  
+	return code;
+};
+  
 Blockly.Python['neopixel_write'] = function(block) {
   var code = 'spi_n.write()\n';
   return code;

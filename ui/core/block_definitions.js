@@ -11205,31 +11205,30 @@ Blockly.Blocks['neopixel_control_CPY'] = {
 
 Blockly.Blocks['neopixel_control'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldLabel(MSG["np_controll"]), "MSG_NEOPIXEL");
-
-    this.appendValueInput("address")
-        .setCheck(null)
-	.appendField("LED");
-
-    this.appendValueInput("color")
-        .setCheck("Number")
-	  .appendField(MSG["color"]);
-
+    this.appendDummyInput().appendField(new Blockly.FieldLabel(MSG["np_controll"]), "MSG_NEOPIXEL");
+    this.appendValueInput("address").setCheck(null).appendField("LED");
+    this.appendValueInput("color").setCheck("Number").appendField(MSG["color"]);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-
     this.setColour(230);
- this.setTooltip(MSG["np_controll_tooltip"]);
- this.setHelpUrl("http://www.bipes.net.br");
+    this.setTooltip(MSG["np_controll_tooltip"]);
+    this.setHelpUrl("http://www.bipes.net.br");
   }
 };
 
+Blockly.Blocks['neopixel_rotate'] = {
+  init: function() {
+    this.appendDummyInput().appendField("Rotate");
+    this.appendValueInput("pixels").setCheck(null).appendField("PIXELS");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(230);
+  }
+};
 
 Blockly.Blocks['neopixel_write'] = {
   init: function() {
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldLabel(MSG["np_write"]), "MSG_NEOPIXEL");
+    this.appendDummyInput().appendField(new Blockly.FieldLabel(MSG["np_write"]), "MSG_NEOPIXEL");
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
