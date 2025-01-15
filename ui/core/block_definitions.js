@@ -1581,50 +1581,32 @@ Blockly.Blocks['tank_turn'] = {
 
 Blockly.Blocks['init_servo'] = {
   init: function() {
-
- this.appendDummyInput()
-      .appendField(new Blockly.FieldImage(
-        "media/servo.png",
-        55,
-        55,
-        "*"))
+    this.appendDummyInput().appendField(new Blockly.FieldImage("media/servo.png",55,55,"*"))
       .appendField(MSG["servo_init"])
-	  ;
-
-
-    this.appendValueInput("pin")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(MSG["pin"]);
+      .appendField(new Blockly.FieldNumber(0, 1, 3), "servonum");
+    this.appendValueInput("pin").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(MSG["pin"]);
+    this.setInputsInline(true);
     this.setColour(230);
-
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-
- this.setTooltip(MSG["servo_init_tooltip"]);
- this.setHelpUrl("http://www.bipes.net.ebr");
+    this.setInputsInline(true);
+    this.setTooltip(MSG["servo_init_tooltip"]);
+    this.setHelpUrl("http://www.bipes.net.ebr");
   }
 };
 
 
 Blockly.Blocks['move_servo'] = {
   init: function() {
-
-
- this.appendDummyInput().appendField(MSG["servo_move"]);
-
-
-    this.appendValueInput("angle")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(MSG["angle"]);
-    this.setColour(230);
-
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-
- this.setTooltip("Move RC servo motor to degrees");
- this.setHelpUrl("http://www.bipes.net.ebr");
+  this.appendDummyInput().appendField(MSG["servo_move"])
+    .appendField(new Blockly.FieldNumber(0, 1, 3), "servonum");
+  this.appendValueInput("angle").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(MSG["angle"]);
+  this.setInputsInline(true);
+  this.setColour(230);
+  this.setPreviousStatement(true, null);
+  this.setNextStatement(true, null);
+  this.setTooltip("Move RC servo motor to degrees");
+  this.setHelpUrl("http://www.bipes.net.ebr");
   }
 };
 

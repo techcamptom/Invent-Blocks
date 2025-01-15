@@ -653,16 +653,16 @@ Blockly.Python['tank_turn'] = function(block) {
 
 Blockly.Python['init_servo'] = function(block) {
   var pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
-  // TODO: Assemble Python into code variable.
+  var servonum = block.getFieldValue('servonum');
   Blockly.Python.definitions_['import_servo'] = 'from servo import Servo';
-  var code = 'servo=Servo(' + pin + ')\n';
+  var code = 'servo'+servonum+'=Servo(' + pin + ')\n';
   return code;
 };
 
 Blockly.Python['move_servo'] = function(block) {
   var value_angle = Blockly.Python.valueToCode(block, 'angle', Blockly.Python.ORDER_ATOMIC);
-
-  var code = 'servo.write_angle(' + value_angle + ')\n';
+  var servonum = block.getFieldValue('servonum');
+  var code = 'servo'+servonum+'.write_angle(' + value_angle + ')\n';
   return code;
 };
 
