@@ -654,17 +654,15 @@ Blockly.Python['tank_turn'] = function(block) {
 Blockly.Python['init_servo'] = function(block) {
   var pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
   // TODO: Assemble Python into code variable.
-  Blockly.Python.definitions_['import_pwm'] = 'from machine import PWM';
-  Blockly.Python.definitions_['import_pin'] = 'from machine import Pin';
-  var code = 'pservo = Pin(' + pin + ')\n';
-      code += 'servo = PWM(pservo,freq=50)\n';
+  Blockly.Python.definitions_['import_servo'] = 'from servo import Servo';
+  var code = 'servo=Servo(' + pin + ')\n';
   return code;
 };
 
 Blockly.Python['move_servo'] = function(block) {
   var value_angle = Blockly.Python.valueToCode(block, 'angle', Blockly.Python.ORDER_ATOMIC);
 
-  var code = 'servo.duty(' + value_angle + ')\n';
+  var code = 'servo.write_angle(' + value_angle + ')\n';
   return code;
 };
 
