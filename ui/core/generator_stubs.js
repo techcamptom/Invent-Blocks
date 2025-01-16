@@ -4827,21 +4827,12 @@ Blockly.Python['files_list'] = function(block) {
 Blockly.Python['hcsr_init'] = function(block) {
   var pEcho = Blockly.Python.valueToCode(block, 'echo', Blockly.Python.ORDER_ATOMIC);
   var pTrig = Blockly.Python.valueToCode(block, 'trigger', Blockly.Python.ORDER_ATOMIC);
-  var pTime = Blockly.Python.valueToCode(block, 'timeout', Blockly.Python.ORDER_ATOMIC);
 
   Blockly.Python.definitions_['import_time'] = 'import time';
   Blockly.Python.definitions_['import_pin'] = 'from machine import Pin';
   Blockly.Python.definitions_['import_hcr'] = 'from hcsr04 import HCSR04';
 
-/*
- * while 1:
-	sensor = HCSR04(trigger_pin=13, echo_pin=15, echo_timeout_us=10000)
-	distance = sensor.distance_mm()
-	print(distance)
-	time.sleep(1)
-
-*/
-  var code = 'ultraSoundSensor = HCSR04(trigger_pin=' + pTrig + ', echo_pin=' + pEcho + ', echo_timeout_us=' + pTime + ')\n';
+  var code = 'ultraSoundSensor = HCSR04(trigger_pin=' + pTrig + ', echo_pin=' + pEcho + ')\n';
 
   return code;
 };

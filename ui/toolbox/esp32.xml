@@ -1242,9 +1242,6 @@
 
   <category name="%{BKY_CAT_ULTRASOUND}">
       <label text="%{BKY_TXT_ULTRASOUND_DESCRIPTION}"></label>
-      <label text="Library: https://github.com/rsc1975/micropython-hcsr04"></label>
-        <button text="%{BKY_TXT_ULTRASOUND_LIB}" callbackKey="installPyLib"></button>
-
 
       <block type="hcsr_init">
         <value name="echo">
@@ -1252,14 +1249,9 @@
             <field name="PIN"></field>
           </shadow>
         </value>
- <value name="trigger">
+        <value name="trigger">
           <shadow type="pinout">
             <field name="PIN"></field>
-          </shadow>
-        </value>
-  <value name="timeout">
-          <shadow type="math_number">
-            <field name="NUM">10000</field>
           </shadow>
         </value>
       </block>
