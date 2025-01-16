@@ -1520,26 +1520,23 @@
   </category>
 
 
-  <category name="Rotatry Encoder">
-      <label text="Rotatry Incremental Encoder"></label>
-        <button text="Load example: encoder" callbackKey="loadExample"></button>
-        <button text="Documentation and how to connect: encoder" callbackKey="loadDoc"></button>
+  <category name="Rotary Encoder">
+      <label text="Rotary Incremental Encoder"></label>
 
       <block type="encoder_init">
-        <value name="p0">
+        <value name="CLK">
           <shadow type="pinout">
-            <field name="ch0"></field>
+            <field name="CLK"></field>
           </shadow>
         </value>
  
-        <value name="p1">
+        <value name="DT">
           <shadow type="pinout">
-            <field name="ch1"></field>
+            <field name="DT"></field>
           </shadow>
         </value>
 
       </block>
-      <block type="encoder_reset"></block>
       <block type="encoder_read"></block>
   </category>
 

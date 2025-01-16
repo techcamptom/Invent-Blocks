@@ -10729,58 +10729,38 @@ Blockly.Blocks['gps_get_time'] = {
 
 //Rotatory Encoder
 Blockly.Blocks['encoder_init'] = {
-  init: function() {
+  init: function () {
     this.setColour(135);
     this.appendDummyInput()
-        .appendField("Init Rotatory Encoder");
-
-
- this.appendDummyInput()
+      .appendField("Init Rotary Encoder");
+    this.appendDummyInput()
       .appendField(new Blockly.FieldImage(
         "media/encoder.png",
         55,
         55,
         "*"));
-        //.setAlign(Blockly.ALIGN_CENTRE);
-
-
-    this.appendValueInput("p0")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("ch0");
-
-    this.appendValueInput("p1")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("ch1");
-
+    //.setAlign(Blockly.ALIGN_CENTRE);
+    this.appendValueInput("CLK")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("CLK");
+    this.appendValueInput("DT")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("DT");
+    this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('');
   }
 };
-
-Blockly.Blocks['encoder_reset'] = {
-  init: function() {
-    this.setColour(135);
-    this.appendDummyInput()
-        .appendField("Reset Encoder");
-
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip('');
-  }
-};
-
 
 Blockly.Blocks['encoder_read'] = {
   init: function() {
     this.setColour(135);
     this.appendDummyInput()
         .appendField("Read Encoder Value");
-
     this.setOutput(true);
-
     this.setTooltip('');
   }
 };
