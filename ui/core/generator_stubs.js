@@ -6387,16 +6387,12 @@ Blockly.Python['bmp180_altitude'] = function(block) {
 
 //BMP280
 Blockly.Python['bmp280_init'] = function(block) {
-	var scl = Blockly.Python.valueToCode(block, 'scl', Blockly.Python.ORDER_ATOMIC);
-	var sda = Blockly.Python.valueToCode(block, 'sda', Blockly.Python.ORDER_ATOMIC);
-
 	Blockly.Python.definitions_['import_I2C_Pin'] = 'from machine import I2C, Pin';
 	Blockly.Python.definitions_['import_bmp280'] = 'from bmp280 import *';
 
-	var code = 'bus=I2C(scl=Pin(' + scl + '), sda=Pin(' + sda + '))\n';
+	var code = 'bus=I2C(scl=Pin(22), sda=Pin(21))\n';
 	code += 'bmp280 = BMP280(bus)\n';
 	code += 'bmp280.use_case(BMP280_CASE_WEATHER)\n';
-	code += 'bmp280.oversample(BMP280_OS_HIGH)\n';
 
 	return code;
 };
@@ -6509,6 +6505,25 @@ Blockly.Python['sht20_temperature'] = function(block) {
 
 Blockly.Python['sht20_humidity'] = function(block) {
 	var code = 'sht20_humidity()';
+	return [code, Blockly.Python.ORDER_NONE];
+};
+
+//aht10
+Blockly.Python['aht10_init'] = function(block) {
+	Blockly.Python.definitions_['import_I2C_Pin'] = 'from machine import I2C, Pin';
+	Blockly.Python.definitions_['import_aht'] = 'import ahtx0';
+	var code = 'bus=I2C(scl=Pin(22), sda=Pin(21))\n';
+	code += 'aht10 = ahtx0.AHT10(bus)\n';
+	return code;
+};
+
+Blockly.Python['aht10_temperature'] = function(block) {
+	var code = 'aht10.temperature';
+	return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['aht10_humidity'] = function(block) {
+	var code = 'aht10.relative_humidity';
 	return [code, Blockly.Python.ORDER_NONE];
 };
 

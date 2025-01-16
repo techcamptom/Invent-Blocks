@@ -12145,17 +12145,6 @@ Blockly.Blocks['bmp280_init'] = {
     this.setColour(135);
     this.appendDummyInput()
         .appendField("Init BMP280");
-
-    this.appendValueInput("scl")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("SCL");
-
-    this.appendValueInput("sda")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("SDA");
-
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('');
@@ -12165,7 +12154,7 @@ Blockly.Blocks['bmp280_init'] = {
 Blockly.Blocks['bmp280_temperature'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(MSG["temperature"]);
+        .appendField("BMP280 "+MSG["temperature"]);
     this.setOutput(true, null);
     this.setColour(230);
  this.setTooltip("Temperature from the BMP280 sensor");
@@ -12176,7 +12165,7 @@ Blockly.Blocks['bmp280_temperature'] = {
 Blockly.Blocks['bmp280_pressure'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(MSG["pressure"]);
+        .appendField("BMP280 "+MSG["pressure"]);
     this.setOutput(true, null);
     this.setColour(230);
  this.setTooltip("Pressure from the BMP280 sensor");
@@ -12352,6 +12341,40 @@ Blockly.Blocks['ccs811_tVOC'] = {
     this.setOutput(true, null);
     this.setColour(230);
  this.setTooltip("Air Quality Sensor CCS811 VOC reading");
+ this.setHelpUrl("http://www.bipes.net.br");
+  }
+};
+
+//AHT10
+Blockly.Blocks['aht10_init'] = {
+  init: function() {
+    this.setColour(135);
+    this.appendDummyInput()
+        .appendField("Init AHT10");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+  }
+};
+
+Blockly.Blocks['aht10_temperature'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("AHT10 " + MSG["temperature"]);
+    this.setOutput(true, null);
+    this.setColour(230);
+ this.setTooltip("Temperature from the AHT10 sensor");
+ this.setHelpUrl("http://www.bipes.net.br");
+  }
+};
+
+Blockly.Blocks['aht10_humidity'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("AHT10 " + MSG["humidity"]);
+    this.setOutput(true, null);
+    this.setColour(230);
+ this.setTooltip("Humidity from the AHT10 sensor");
  this.setHelpUrl("http://www.bipes.net.br");
   }
 };
