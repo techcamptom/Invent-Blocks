@@ -546,9 +546,9 @@ Blockly.Python['init_oled'] = function(block) {
   Blockly.Python.definitions_['import_pin'] = 'from machine import Pin';
   Blockly.Python.definitions_['import_oled_a'] = 'from machine import I2C';
   Blockly.Python.definitions_['import_ssd'] = 'import ssd1306';
-  Blockly.Python.definitions_['import_sleep'] = 'from time import sleep';
+  //Blockly.Python.definitions_['import_sleep'] = 'from time import sleep';
 
-  var code = 'i2c=I2C(' + i2c + ', scl=Pin(' + scl + '), sda=Pin(' + sda + '))\n';
+  var code = 'i2c=I2C(1, scl=Pin(22), sda=Pin(21))\n';
       code += 'oled_width = 128\n';
       code += 'oled_height = 64\n';
       code += 'oled = ssd1306.SSD1306_I2C(oled_width, oled_height, i2c)\n';
@@ -557,13 +557,13 @@ Blockly.Python['init_oled'] = function(block) {
 };
 
 Blockly.Python['clear_oled'] = function(block) {
-  var code = 'oled.fill(0)\noled.show()\n';
+  var code = 'oled.fill(0)\n';
   return code;
 };
 
 Blockly.Python['fill_oled'] = function(block) {
   var v = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
-  var code = 'oled.fill(' + v + ')\noled.show()\n';
+  var code = 'oled.fill(' + v + ')\n';
   return code;
 };
 
@@ -577,7 +577,7 @@ Blockly.Python['write_oled'] = function(block) {
 	var y = Blockly.Python.valueToCode(block, 'y', Blockly.Python.ORDER_ATOMIC);
 	var t = Blockly.Python.valueToCode(block, 'text', Blockly.Python.ORDER_ATOMIC);
   
-	var code = 'oled.text(' + t + ', ' + x + ', ' + y + ')\noled.show()\n';
+	var code = 'oled.text(' + t + ', ' + x + ', ' + y + ')\n';
 	return code;
   };
   
@@ -587,7 +587,7 @@ Blockly.Python['write_oled'] = function(block) {
 	var x2 = Blockly.Python.valueToCode(block, 'x2', Blockly.Python.ORDER_ATOMIC);
 	var y2 = Blockly.Python.valueToCode(block, 'y2', Blockly.Python.ORDER_ATOMIC);
   
-	var code = 'oled.line(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', '+ 1 + ')\noled.show()\n';
+	var code = 'oled.line(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', '+ 1 + ')\n';
 	return code;
   };
   
@@ -597,7 +597,7 @@ Blockly.Python['write_oled'] = function(block) {
 	var x2 = Blockly.Python.valueToCode(block, 'x2', Blockly.Python.ORDER_ATOMIC);
 	var y2 = Blockly.Python.valueToCode(block, 'y2', Blockly.Python.ORDER_ATOMIC);
   
-	var code = 'oled.rect(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', '+ 1 + ')\noled.show()\n';
+	var code = 'oled.rect(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', '+ 1 + ')\n';
 	return code;
   };
   
@@ -607,7 +607,7 @@ Blockly.Python['write_oled'] = function(block) {
 	var x2 = Blockly.Python.valueToCode(block, 'x2', Blockly.Python.ORDER_ATOMIC);
 	var y2 = Blockly.Python.valueToCode(block, 'y2', Blockly.Python.ORDER_ATOMIC);
   
-	var code = 'oled.fill_rect(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', '+ 1 + ')\noled.show()\n';
+	var code = 'oled.fill_rect(' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2 + ', '+ 1 + ')\n';
 	return code;
   };
   
@@ -615,7 +615,7 @@ Blockly.Python['write_oled'] = function(block) {
 	var x = Blockly.Python.valueToCode(block, 'x', Blockly.Python.ORDER_ATOMIC);
 	var y = Blockly.Python.valueToCode(block, 'y', Blockly.Python.ORDER_ATOMIC);
   
-	var code = 'oled.scroll(' + x + ', ' + y + ')\noled.show()\n';
+	var code = 'oled.scroll(' + x + ', ' + y + ')\n';
 	return code;
   };
   

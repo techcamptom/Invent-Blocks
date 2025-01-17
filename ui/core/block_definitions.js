@@ -1312,34 +1312,18 @@ Blockly.Blocks['mpu6050_read_gyro_z'] = {
 //End of MPU6050
 
 Blockly.Blocks['init_oled'] = {
-  init: function() {
+  init: function () {
     this.setColour(135);
     this.appendDummyInput()
-        .appendField("Init I2C SSD1306 OLED Display");
-
- this.appendDummyInput()
+      .appendField("Init I2C SSD1306 OLED");
+    this.appendDummyInput()
       .appendField(new Blockly.FieldImage(
         "media/oled.png",
         55,
         55,
         "*"));
-        //.setAlign(Blockly.ALIGN_CENTRE);
-
-    this.appendValueInput("i2c")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("I2C");
-
-    this.appendValueInput("scl")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("SCL");
-
-    this.appendValueInput("sda")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("SDA");
-
+    //.setAlign(Blockly.ALIGN_CENTRE);
+    this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('');
@@ -1350,7 +1334,7 @@ Blockly.Blocks['fill_oled'] = {
   init: function() {
     this.appendValueInput("value")
         .setCheck("Number")
-        .appendField("Fill OLED Display with ");
+        .appendField("Fill OLED with");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
@@ -1362,7 +1346,7 @@ Blockly.Blocks['fill_oled'] = {
 Blockly.Blocks['clear_oled'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Clear OLED Display");
+        .appendField("Clear OLED");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
@@ -1374,7 +1358,7 @@ Blockly.Blocks['clear_oled'] = {
 Blockly.Blocks['show_oled'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Update OLED Display ");
+        .appendField("Update OLED");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
@@ -1384,144 +1368,148 @@ Blockly.Blocks['show_oled'] = {
 };
 
 Blockly.Blocks['write_oled'] = {
-  init: function() {
+  init: function () {
     this.appendDummyInput()
-        .appendField("Write text on display");
+      .appendField("OLED text");
 
     this.appendValueInput("x")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("X position");
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("X");
     this.appendValueInput("y")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Y position");
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Y");
     this.appendValueInput("text")
-        .setCheck("String")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Text");
+      .setCheck("String")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Text");
 
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
-
- this.setTooltip("Write text to OLED Display");
- this.setHelpUrl("http://www.bipes.net.br");
+    this.setTooltip("Write text to OLED Display");
+    this.setHelpUrl("http://www.bipes.net.br");
   }
 };
 
 Blockly.Blocks['line_oled'] = {
-  init: function() {
+  init: function () {
     this.appendDummyInput()
-        .appendField("Draw a line on display");
+      .appendField("Draw line on OLED");
 
-        this.appendValueInput("x1")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Initial X position");
+    this.appendValueInput("x1")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("X1");
     this.appendValueInput("y1")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Initial Y position");
-        this.appendValueInput("x2")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Final X position");
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Y1");
+    this.appendValueInput("x2")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("X2");
     this.appendValueInput("y2")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Final Y position");
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Y2");
 
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
-
- this.setTooltip("Draw a line on OLED Display");
- this.setHelpUrl("http://www.bipes.net.br");
+    this.setTooltip("Draw a line on OLED Display");
+    this.setHelpUrl("http://www.bipes.net.br");
   }
 };
 
 Blockly.Blocks['rect_oled'] = {
-  init: function() {
+  init: function () {
     this.appendDummyInput()
-        .appendField("Draw a rectangle outline on display");
+      .appendField("Draw rectangle on OLED");
 
-        this.appendValueInput("x1")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Initial X position");
+    this.appendValueInput("x1")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("X1");
     this.appendValueInput("y1")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Initial Y position");
-        this.appendValueInput("x2")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Width");
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Y1");
+    this.appendValueInput("x2")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Width");
     this.appendValueInput("y2")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Height");
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Height");
 
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
 
- this.setTooltip("Draw a rectangle on OLED Display");
- this.setHelpUrl("http://www.bipes.net.br");
+    this.setTooltip("Draw a rectangle on OLED Display");
+    this.setHelpUrl("http://www.bipes.net.br");
   }
 };
 Blockly.Blocks['fill_rect_oled'] = {
-  init: function() {
+  init: function () {
     this.appendDummyInput()
-        .appendField("Draw a solid rectangle outline on display");
+      .appendField("Draw solid rectangle on OLED");
 
-        this.appendValueInput("x1")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Initial X position");
+    this.appendValueInput("x1")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("X1");
     this.appendValueInput("y1")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Initial Y position");
-        this.appendValueInput("x2")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Width");
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Y1");
+    this.appendValueInput("x2")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Width");
     this.appendValueInput("y2")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Height");
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Height");
 
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
 
- this.setTooltip("Draw a line on OLED Display");
- this.setHelpUrl("http://www.bipes.net.br");
+    this.setTooltip("Draw a line on OLED Display");
+    this.setHelpUrl("http://www.bipes.net.br");
   }
 };
 
 Blockly.Blocks['scroll_oled'] = {
-  init: function() {
+  init: function () {
     this.appendDummyInput()
-        .appendField("scroll the display");
+      .appendField("Scroll OLED");
 
-        this.appendValueInput("x")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Scroll back(-) or forth(+)");
+    this.appendValueInput("x")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("X");
     this.appendValueInput("y")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Scroll up (-) or down(+)");
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Y");
+
+    this.setInputsInline(true);
 
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);
 
- this.setTooltip("Scroll the OLED Display");
- this.setHelpUrl("http://www.bipes.net.br");
+    this.setTooltip("Scroll the OLED Display");
+    this.setHelpUrl("http://www.bipes.net.br");
   }
 };
 
