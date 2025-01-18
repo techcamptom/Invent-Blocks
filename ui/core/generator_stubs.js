@@ -484,52 +484,58 @@ Blockly.Python['onewire_ds18x20_read_temp'] = function(block) {
 //MPU6050
 
 Blockly.Python['init_mpu6050'] = function(block) {
-  var scl = Blockly.Python.valueToCode(block, 'scl', Blockly.Python.ORDER_ATOMIC);
-  var sda = Blockly.Python.valueToCode(block, 'sda', Blockly.Python.ORDER_ATOMIC);
+  Blockly.Python.definitions_['import_MPU6050'] = 'from mpu6050 import MPU6050';
+  Blockly.Python.definitions_['import_I2C_Pin'] = 'from machine import I2C, Pin';
 
-  Blockly.Python.definitions_['import_imu'] = 'import imu';
-
-//  var code = 'i2c=I2C(-1, scl=Pin(' + scl + '), sda=Pin(' + sda + '))\n';
- //     code += 'oled = ssd1306.SSD1306_I2C(oled_width, oled_height, i2c)\n';
-    var code = "imu.init_MPU()\nimu.calibrate_sensors()\n";
-
+  var code = 'i2c = I2C(scl=Pin(22), sda=Pin(21))\n';
+  code += 'mpu6050 = MPU6050(i2c)\n';
   return code;
 };
 
 
 Blockly.Python['mpu6050_read_acc_x'] = function(block) {
-  var code = 'imu.read_mpu6050v(1)';
+  var code = 'mpu6050.read_accel_data()["x"]';
   return [code, Blockly.Python.ORDER_NONE];
 };
 
 
 Blockly.Python['mpu6050_read_acc_y'] = function(block) {
-  var code = 'imu.read_mpu6050v(2)';
+  var code = 'mpu6050.read_accel_data()["y"]';
   return [code, Blockly.Python.ORDER_NONE];
 };
 
 
 Blockly.Python['mpu6050_read_acc_z'] = function(block) {
-  var code = 'imu.read_mpu6050v(3)';
+  var code = 'mpu6050.read_accel_data()["z"]';
   return [code, Blockly.Python.ORDER_NONE];
 };
 
 
+Blockly.Python['mpu6050_read_angle_x'] = function(block) {
+	var code = 'mpu6050.read_angle()["x"]';
+	return [code, Blockly.Python.ORDER_NONE];
+};
+  
+Blockly.Python['mpu6050_read_angle_y'] = function(block) {
+	var code = 'mpu6050.read_angle()["y"]';
+	return [code, Blockly.Python.ORDER_NONE];
+};
+  
 Blockly.Python['mpu6050_read_gyro_x'] = function(block) {
-  var code = 'imu.read_mpu6050v(4)';
-  return [code, Blockly.Python.ORDER_NONE];
+	var code = 'mpu6050.read_gyro_data()["x"]';
+	return [code, Blockly.Python.ORDER_NONE];
 };
 
 
 Blockly.Python['mpu6050_read_gyro_y'] = function(block) {
-  var code = 'imu.read_mpu6050v(5)';
-  return [code, Blockly.Python.ORDER_NONE];
+	var code = 'mpu6050.read_gyro_data()["y"]';
+	return [code, Blockly.Python.ORDER_NONE];
 };
 
 
 Blockly.Python['mpu6050_read_gyro_z'] = function(block) {
-  var code = 'imu.read_mpu6050v(6)';
-  return [code, Blockly.Python.ORDER_NONE];
+	var code = 'mpu6050.read_gyro_data()["z"]';
+	return [code, Blockly.Python.ORDER_NONE];
 };
 
 
@@ -4884,49 +4890,19 @@ Blockly.Python['rfid_rc522_init'] = function(block) {
   var miso = Blockly.Python.valueToCode(block, 'miso', Blockly.Python.ORDER_ATOMIC);
   var rst = Blockly.Python.valueToCode(block, 'rst', Blockly.Python.ORDER_ATOMIC);
   var cs = Blockly.Python.valueToCode(block, 'cs', Blockly.Python.ORDER_ATOMIC);
-  Blockly.Python.definitions_['import_mfrc522'] = 'import mfrc522';
+  Blockly.Python.definitions_['import_softSPI'] = 'from machine import SoftSPI';
+  Blockly.Python.definitions_['import_mfrc522'] = 'from mfrc522 import MFRC522';
 
-  //var code = 'rdr=mfrc522.MFRC522(0,2,4,5,14)\n';
-  var code = 'rdr=mfrc522.MFRC522(' + sck + ',' + mosi + ',' + miso + ',' + rst + ',' + cs + ')\n';
+  var code = 'spi=SoftSPI(baudrate=100000, polarity=0, phase=0, sck=' + sck + ', mosi=' + mosi + ', miso=' + miso + ')\n';
+  	code += 'rfid=MFRC522(spi,' + rst + ',' + cs + ')\n';
   return code;
 };
 
-
-Blockly.Python['rfid_rc522_detect_card'] = function(block) {
-  var stat = Blockly.Python.valueToCode(block, 'stat', Blockly.Python.ORDER_ATOMIC);
-  var tag = Blockly.Python.valueToCode(block, 'tag', Blockly.Python.ORDER_ATOMIC);
-
-  Blockly.Python.definitions_['import_mfrc522'] = 'import mfrc522';
-
-  var code = '(' + stat + ',' + tag + ') = rdr.request(rdr.REQIDL)\n';
-  //return [code, Blockly.Python.ORDER_NONE];
-  return code;
+Blockly.Python['rfid_rc522_read_tag'] = function(block) {
+	var code = 'rfid.read_tag()\n';
+	return [code, Blockly.Python.ORDER_NONE];
 };
-
-
-Blockly.Python['rfid_rc522_anticoll'] = function(block) {
-  var stat = Blockly.Python.valueToCode(block, 'stat', Blockly.Python.ORDER_ATOMIC);
-  var tag = Blockly.Python.valueToCode(block, 'tag', Blockly.Python.ORDER_ATOMIC);
-
-  var code = '(' + stat + ',' + tag + ') = rdr.anticoll()\n';
-  return code;
-
-  //Blockly.Python.definitions_['import_mfrc522'] = 'import mfrc522';
-  //var code = 'rdr.anticoll()';
-  //return [code, Blockly.Python.ORDER_NONE];
-};
-
-
-Blockly.Python['rfid_rc522_read_card'] = function(block) {
-  var code = 'rdr=mfrc522.MFRC522(0,2,4,5,14)\n';
-  return code;
-};
-
-
-Blockly.Python['rfid_rc522_write_card'] = function(block) {
-  var code = 'rdr=mfrc522.MFRC522(0,2,4,5,14)\n';
-  return code;
-};
+  
 
 
 Blockly.Python['umail_init'] = function(block) {

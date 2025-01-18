@@ -1205,30 +1205,18 @@ Blockly.Blocks['onewire_ds18x20_read_temp'] = {
 
 //MPU6050
 Blockly.Blocks['init_mpu6050'] = {
-  init: function() {
+  init: function () {
     this.setColour(135);
     this.appendDummyInput()
-        .appendField("Init MPU6050 IMU");
-
-
- this.appendDummyInput()
+      .appendField("Init MPU6050 IMU");
+    this.appendDummyInput()
       .appendField(new Blockly.FieldImage(
         "media/mpu6050.png",
         55,
         55,
         "*"));
-        //.setAlign(Blockly.ALIGN_CENTRE);
-
-    this.appendValueInput("scl")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("SCL");
-
-    this.appendValueInput("sda")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("SDA");
-
+    //.setAlign(Blockly.ALIGN_CENTRE);
+    this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('');
@@ -1272,6 +1260,28 @@ Blockly.Blocks['mpu6050_read_acc_z'] = {
   }
 };
 
+
+Blockly.Blocks['mpu6050_read_angle_x'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldLabelSerializable("Angle - X axis"), "MSG_READ_MPU6050");
+    this.setOutput(true, null);
+    this.setColour(230);
+ this.setTooltip("Angle around X axis");
+ this.setHelpUrl("http://www.bipes.net.br");
+  }
+};
+
+Blockly.Blocks['mpu6050_read_angle_y'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldLabelSerializable("Angle - Y axis"), "MSG_READ_MPU6050");
+    this.setOutput(true, null);
+    this.setColour(230);
+ this.setTooltip("Angle around Y axis");
+ this.setHelpUrl("http://www.bipes.net.br");
+  }
+};
 
 Blockly.Blocks['mpu6050_read_gyro_x'] = {
   init: function() {
@@ -9682,43 +9692,37 @@ Blockly.Blocks['predict'] = {
 //RC522 RFID module
 
 Blockly.Blocks['rfid_rc522_init'] = {
-  init: function() {
+  init: function () {
     this.setColour(135);
     this.appendDummyInput()
-        .appendField("Init RC522 RFID Module");
-
- this.appendDummyInput()
+      .appendField("Init RC522 RFID Module");
+    this.appendDummyInput()
       .appendField(new Blockly.FieldImage(
         "media/RC522.jpg",
         55,
         55,
         "*"));
-        //.setAlign(Blockly.ALIGN_CENTRE);
-
+    //.setAlign(Blockly.ALIGN_CENTRE);
     this.appendValueInput("sck")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("SCK");
-
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("SCK");
     this.appendValueInput("mosi")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("MOSI");
-
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("MOSI");
     this.appendValueInput("miso")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("MISO");
-
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("MISO");
     this.appendValueInput("rst")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("RST");
-
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("RST");
     this.appendValueInput("cs")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("CS");
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("CS");
 
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -9726,88 +9730,16 @@ Blockly.Blocks['rfid_rc522_init'] = {
   }
 };
 
-Blockly.Blocks['rfid_rc522_detect_card'] = {
+Blockly.Blocks['rfid_rc522_read_tag'] = {
   init: function() {
-    this.setColour(135);
     this.appendDummyInput()
-        .appendField("Check if RFID Card is present");
-
-    this.appendValueInput("stat")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("status");
-
-    this.appendValueInput("tag")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("tag");
-
-
-    //this.setOutput(true);
-
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-
-    this.setTooltip('');
+        .appendField(new Blockly.FieldLabelSerializable("RFID tag code"), "RFID tag code");
+    this.setOutput(true, null);
+    this.setColour(230);
+ this.setTooltip("Angle around X axis");
+ this.setHelpUrl("http://www.bipes.net.br");
   }
 };
-
-
-Blockly.Blocks['rfid_rc522_anticoll'] = {
-  init: function() {
-    this.setColour(135);
-    this.appendDummyInput()
-        .appendField("Get card identification (UID)");
-
-    this.appendValueInput("stat")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("status");
-
-    this.appendValueInput("tag")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("tag");
-
-
-    //this.setOutput(true);
-
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-
-    this.setTooltip('');
-  }
-};
-
-
-
-//rfid_rc522_read_card
-Blockly.Blocks['rfid_rc522_read_card'] = {
-  init: function() {
-    this.setColour(135);
-    this.appendDummyInput()
-        .appendField("Read RFID Card Memory");
-
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip('');
-  }
-};
-
-
-//rfid_rc522_write_card
-Blockly.Blocks['rfid_rc522_write_card'] = {
-  init: function() {
-    this.setColour(135);
-    this.appendDummyInput()
-        .appendField("Write RFID Card Memory");
-
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip('');
-  }
-};
-
 
 
 //I2C Char LCD
