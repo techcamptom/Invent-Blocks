@@ -5456,7 +5456,26 @@ Blockly.Python['encoder_read'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-
+//Keypad
+Blockly.Python['keypad4x4_init'] = function(block) {
+	var r1 = Blockly.Python.valueToCode(block, 'r1', Blockly.Python.ORDER_ATOMIC);
+	var r2 = Blockly.Python.valueToCode(block, 'r2', Blockly.Python.ORDER_ATOMIC);
+	var r3 = Blockly.Python.valueToCode(block, 'r3', Blockly.Python.ORDER_ATOMIC);
+	var r4 = Blockly.Python.valueToCode(block, 'r4', Blockly.Python.ORDER_ATOMIC);
+	var c1 = Blockly.Python.valueToCode(block, 'c1', Blockly.Python.ORDER_ATOMIC);
+	var c2 = Blockly.Python.valueToCode(block, 'c2', Blockly.Python.ORDER_ATOMIC);
+	var c3 = Blockly.Python.valueToCode(block, 'c3', Blockly.Python.ORDER_ATOMIC);
+	var c4 = Blockly.Python.valueToCode(block, 'c4', Blockly.Python.ORDER_ATOMIC);
+	Blockly.Python.definitions_['import_keypad'] = 'from keypad import Keypad';
+	var	code = "keypad = Keypad("+r1+","+r2+","+r3+","+r4+","+c1+","+c2+","+c3+","+c4+")\n";
+	return code;
+};
+  
+Blockly.Python['keypad4x4_read'] = function(block) {
+	var code = 'keypad.get_button()';
+	return [code, Blockly.Python.ORDER_NONE];
+};
+  
 //Stepper Motor
 Blockly.Python['stepper_init'] = function(block) {
   var p0 = Blockly.Python.valueToCode(block, 'p0', Blockly.Python.ORDER_ATOMIC);

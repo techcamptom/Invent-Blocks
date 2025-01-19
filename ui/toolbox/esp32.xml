@@ -1375,22 +1375,34 @@
 
   <category name="Rotary Encoder">
       <label text="Rotary Incremental Encoder"></label>
-
       <block type="encoder_init">
         <value name="CLK">
           <shadow type="pinout">
             <field name="CLK"></field>
           </shadow>
         </value>
- 
         <value name="DT">
           <shadow type="pinout">
             <field name="DT"></field>
           </shadow>
         </value>
-
       </block>
       <block type="encoder_read"></block>
+  </category>
+
+  <category name="Keypad">
+      <label text="4x4 Keypad"></label>
+      <block type="keypad4x4_init">
+        <value name="r1"><shadow type="pinout"><field name="r1"></field></shadow></value>
+        <value name="r2"><shadow type="pinout"><field name="r2"></field></shadow></value>
+        <value name="r3"><shadow type="pinout"><field name="r3"></field></shadow></value>
+        <value name="r4"><shadow type="pinout"><field name="r4"></field></shadow></value>
+        <value name="c1"><shadow type="pinout"><field name="c1"></field></shadow></value>
+        <value name="c2"><shadow type="pinout"><field name="c2"></field></shadow></value>
+        <value name="c3"><shadow type="pinout"><field name="c3"></field></shadow></value>
+        <value name="c4"><shadow type="pinout"><field name="c4"></field></shadow></value>
+      </block>
+      <block type="keypad4x4_read"></block>
   </category>
 
   <category name="Camera (ESP32CAM)" hidden="true">

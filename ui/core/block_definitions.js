@@ -10668,6 +10668,36 @@ Blockly.Blocks['encoder_read'] = {
   }
 };
 
+Blockly.Blocks['keypad4x4_init'] = {
+  init: function () {
+    this.setColour(135);
+    this.appendDummyInput()
+      .appendField("Init 4x4 Keypad")
+      .appendField(new Blockly.FieldImage("media/keypad.png",55,55,"*")).setAlign(Blockly.ALIGN_LEFT);
+    this.appendValueInput("r1").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("r1");
+    this.appendValueInput("r2").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("r2");
+    this.appendValueInput("r3").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("r3");
+    this.appendValueInput("r4").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("r4");
+    this.appendValueInput("c1").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("c1");
+    this.appendValueInput("c2").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("c2");
+    this.appendValueInput("c3").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("c3");
+    this.appendValueInput("c4").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("c4");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+  }
+};
+
+Blockly.Blocks['keypad4x4_read'] = {
+  init: function() {
+    this.setColour(135);
+    this.appendDummyInput()
+        .appendField("Read 4x4 keypad");
+    this.setOutput(true);
+    this.setTooltip('');
+  }
+};
+
 //Stepper Motor
 //
 //
