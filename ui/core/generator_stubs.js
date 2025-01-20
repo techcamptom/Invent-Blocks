@@ -6522,6 +6522,21 @@ Blockly.Python['aht10_humidity'] = function(block) {
 	return [code, Blockly.Python.ORDER_NONE];
 };
 
+//VL53L0X Time of Flight sensor
+Blockly.Python['vl53l0x_init'] = function(block) {
+	Blockly.Python.definitions_['import_I2C_Pin'] = 'from machine import I2C, Pin';
+	Blockly.Python.definitions_['import_vl53l0x'] = 'import vl53l0x';
+	var code = 'i2c=I2C(scl=Pin(22), sda=Pin(21))\n';
+		code += 'vl53l0x=vl53l0x.VL53L0X(i2c)\n';
+		code += 'vl53l0x.start()\n';
+	return code;
+};
+
+Blockly.Python['vl53l0x_distance'] = function(block) {
+	var code = 'vl53l0x.read()';
+	return [code, Blockly.Python.ORDER_NONE];
+};
+
 //MPU9250
 Blockly.Python['mpu9250_init'] = function(block) {
 	var scl = Blockly.Python.valueToCode(block, 'scl', Blockly.Python.ORDER_ATOMIC);

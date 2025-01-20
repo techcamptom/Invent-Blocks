@@ -12329,6 +12329,28 @@ Blockly.Blocks['aht10_humidity'] = {
   }
 };
 
+// Time of flight
+Blockly.Blocks['vl53l0x_init'] = {
+  init: function() {
+    this.setColour(135);
+    this.appendDummyInput()
+        .appendField("Init VL53L0X");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+  }
+};
+
+Blockly.Blocks['vl53l0x_distance'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("VL53L0X distance (mm)");
+    this.setOutput(true, null);
+    this.setColour(230);
+    this.setHelpUrl("http://www.bipes.net.br");
+  }
+};
+
 //SHT20
 Blockly.Blocks['sht20_init'] = {
   init: function() {

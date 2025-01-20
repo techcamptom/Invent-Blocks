@@ -1124,14 +1124,10 @@
 
     <category name="%{BKY_CAT_TEMP_HUMI}">
       <label text="AHT10 I2C Temperature and Humidity Sensor"></label>
-      <block type="aht10_init">
-      </block>
-
-    <block type="aht10_temperature"> </block>
-    <block type="aht10_humidity"> </block>
-
+      <block type="aht10_init"></block>
+      <block type="aht10_temperature"> </block>
+      <block type="aht10_humidity"> </block>
     </category>
-
 
 <!--Adicionando os blocos do Anenmômetro-->
     <category name="Anemômetro" hidden="true">
@@ -1202,6 +1198,12 @@
       <block type="hcsr_read">
       </block>
 
+  </category>
+
+  <category name="Time of Flight">
+    <label text="VL53L0X Time of Flight Sensor"></label>
+    <block type="vl53l0x_init"></block>
+    <block type="vl53l0x_distance"></block>
   </category>
 
   <category name="GPS">
@@ -1507,47 +1509,6 @@
           <field name="NUM">1</field>
         </shadow>
       </value>
-    </block>
-  </category>
-
-  <category name="%{BKY_CAT_DC_MOTOR}">
-      <label text="%{BKY_TXT_DC_MOTOR_DESCRIPTION}"></label>
-    <block type="dc_motor_init">
-      <value name="pwm">
-        <shadow type="pinout">
-          <field name="PWM"></field>
-        </shadow>
-      </value>
-      <value name="dir1">
-        <shadow type="pinout">
-          <field name="Dir1"></field>
-        </shadow>
-      </value>
-      <value name="dir2">
-        <shadow type="pinout">
-          <field name="Dir2"></field>
-        </shadow>
-      </value>
-
-    </block>
-
-    <block type="dc_motor_power">
-     <value name="power">
-        <shadow type="math_number">
-          <field name="NUM">70</field>
-        </shadow>
-      </value>
-    </block>
-
-    <block type="dc_motor_direction">
-     <value name="dir">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-    </block>
-_
-    <block type="dc_motor_stop">
     </block>
   </category>
 
