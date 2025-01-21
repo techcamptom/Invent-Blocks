@@ -1129,6 +1129,17 @@
       <block type="aht10_humidity"> </block>
     </category>
 
+    <category name="Infrared Receiver">
+      <block type="irnec_receive">
+        <value name="pin">
+          <shadow type="pinout">
+            <field name="PIN"></field>
+          </shadow>
+        </value>
+        <field name="irnec_callback">Callback Function</field>
+      </block>
+    </category>
+
 <!--Adicionando os blocos do Anenmômetro-->
     <category name="Anemômetro" hidden="true">
     <label text="Anenômetro"></label>
@@ -1208,9 +1219,6 @@
 
   <category name="GPS">
       <label text="Global Positioning System (GPS) sensor"></label>
-      <label text="Library: https://github.com/rafaelaroca/mini_micropyGPS"></label>
-      <button text="Install mini_micropyGPS library" callbackKey="installPyLib"></button>
-
       <block type="gps_init">
       <value name="uart">
         <shadow type="math_number">
@@ -1229,7 +1237,7 @@
       </value>
       <value name="bps">
         <shadow type="math_number">
-          <field name="NUM">38400</field>
+          <field name="NUM">9600</field>
         </shadow>
       </value>
       </block>

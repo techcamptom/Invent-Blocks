@@ -2466,12 +2466,7 @@ Blockly.Blocks['easymqtt_subscribe'] = {
         .appendField(new Blockly.FieldLabelSerializable(MSG["easymqtt_subscribe"]), "EASYMQTT_TOPIC");
     this.appendDummyInput()
         .appendField(MSG['when'])
-        .appendField(new Blockly.FieldVariable(
-          'data',
-          null,
-          ['Number'],
-          'Number'
-        ), 'EASYMQTT_VAR')
+        .appendField(new Blockly.FieldVariable('data',null,['Number'],'Number'), 'EASYMQTT_VAR')
         .appendField(MSG["data_received"]);
     this.appendStatementInput('do')
         .appendField('do');
@@ -10524,6 +10519,7 @@ Blockly.Blocks['gps_init'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("Baud Rate");
 
+    this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('');
@@ -12326,6 +12322,32 @@ Blockly.Blocks['aht10_humidity'] = {
     this.setColour(230);
  this.setTooltip("Humidity from the AHT10 sensor");
  this.setHelpUrl("http://www.bipes.net.br");
+  }
+};
+
+
+// Infrared receive for NEC 8-bit code (typical cheap remotes)
+Blockly.Blocks['irnec_receive'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("On receive NEC 8-bit infrared");
+    this.appendValueInput("pin")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(MSG["pin"]);
+    this.appendDummyInput()
+        .appendField(MSG["with"])
+        .appendField(new Blockly.FieldVariable('data'), 'IRNEC_DATA')
+        .appendField(new Blockly.FieldVariable('addr'), 'IRNEC_ADDR')
+        .appendField(new Blockly.FieldVariable('ctrl'), 'IRNEC_CTRL');
+    this.appendStatementInput("do")
+        .setCheck(null)
+        .appendField("do");
+    this.setColour(230);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("Code executed when infrared signal received");
+    this.setHelpUrl("bipes.net.br");
   }
 };
 

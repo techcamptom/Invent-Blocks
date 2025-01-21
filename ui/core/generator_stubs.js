@@ -5366,19 +5366,19 @@ Blockly.Python['gps_init'] = function(block) {
 	var uart = Blockly.Python.valueToCode(block, 'uart', Blockly.Python.ORDER_ATOMIC);
 
 	Blockly.Python.definitions_['import_uart'] = 'from machine import UART';
-	Blockly.Python.definitions_['import_micropyGPS'] = 'from mini_micropyGPS import MicropyGPS';
+	Blockly.Python.definitions_['import_micropyGPS'] = 'from micropyGPS import MicropyGPS';
 
-	var code =  'uartGPS = UART(' + uart + ', tx=' + tx + ', rx=' + rx + ')\n';
-	    code += 'uartGPS.init(' + bps + ', bits=8, parity=None, stop=1)\n';
+	var code =  'gps_serial = machine.UART(' + uart + ', baudrate=9600, tx=' + tx + ', rx=' + rx + ')\n';
 	    code += 'gps = MicropyGPS()\n';
 	return code;
 };
 
 Blockly.Python['gps_update'] = function(block) {
 
-	var code =  'if uartGPS.any():\n';
-	    code += '\tc=int.from_bytes(uartGPS.read(1), "big")\n';
-	    code += '\tstat = gps.update(chr(c))\n';
+	var code =  'while gps_serial.any():\n';
+	    code += '\tdata = gps_serial.read()\n';
+	    code += '\tfor byte in data:\n';
+	    code += '\t\tstat = gps.update(chr(byte))\n';
 
 	return code;
 };
@@ -6521,6 +6521,54 @@ Blockly.Python['aht10_humidity'] = function(block) {
 	var code = 'aht10.relative_humidity';
 	return [code, Blockly.Python.ORDER_NONE];
 };
+
+// Infrared receive for NEC 8-bit code (typical cheap remotes)
+Blockly.Python['irnec_receive'] = function(block) {
+	var data_var_name = Blockly.Python.nameDB_.getName(block.getFieldValue('IRNEC_DATA'), Blockly.VARIABLE_CATEGORY_NAME);
+	var addr_var_name = Blockly.Python.nameDB_.getName(block.getFieldValue('IRNEC_ADDR'), Blockly.VARIABLE_CATEGORY_NAME);
+	var ctrl_var_name = Blockly.Python.nameDB_.getName(block.getFieldValue('IRNEC_CTRL'), Blockly.VARIABLE_CATEGORY_NAME);
+	// Fix for global variables inside callback
+	// Piece of code from generators/python/procedures.js
+	// Add a 'global' statement for every variable that is not shadowed by a local parameter.
+	var globals = [];
+	var varName;
+	var workspace = block.workspace;
+	var variables = Blockly.Variables.allUsedVarModels(workspace) || [];
+	for (var i = 0, variable; variable = variables[i]; i++) {
+		varName = variable.name;
+		if (block.getVars().indexOf(varName) == -1 && varName != data_var_name && varName != addr_var_name && varName != ctrl_var_name) {
+		globals.push(Blockly.Python.nameDB_.getName(varName,
+			Blockly.VARIABLE_CATEGORY_NAME));
+		}
+	}
+	// Add developer variables.
+	var devVarList = Blockly.Variables.allDeveloperVariables(workspace);
+	for (var i = 0; i < devVarList.length; i++) {
+		globals.push(Blockly.Python.nameDB_.getName(devVarList[i],
+			Blockly.Names.DEVELOPER_VARIABLE_TYPE));
+	}
+	globals = globals.length ? Blockly.Python.INDENT + 'global ' + globals.join(', ') : '';
+	// End of code from generators/python/procedures.js
+
+	var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_ATOMIC);
+	var value_pin = value_pin.replace('(','').replace(')','');
+	var funct_code = Blockly.Python.statementToCode(block, 'do');
+  
+	Blockly.Python.definitions_['import_pin'] = 'from machine import Pin';
+	Blockly.Python.definitions_['import_irnec'] = 'from nec import NEC_8';
+
+
+	var function_name = Blockly.Python.provideFunction_(
+		'irnec_callback',
+		['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '('+data_var_name+','+addr_var_name+','+ctrl_var_name+'):',
+		globals,
+		funct_code]);
+
+	code = `p_nec_ir = Pin(${value_pin}, Pin.IN)\n`;
+	code += `nec_ir = NEC_8(p_nec_ir, irnec_callback)\n`;
+	return code;
+};
+
 
 //VL53L0X Time of Flight sensor
 Blockly.Python['vl53l0x_init'] = function(block) {
