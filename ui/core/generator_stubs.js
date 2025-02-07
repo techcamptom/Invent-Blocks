@@ -5,60 +5,60 @@
 let UPythonClass = {}
 
 Blockly.Python['invent_move'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	var value_distance = Blockly.Python.valueToCode(block, 'DISTANCE', Blockly.Python.ORDER_ATOMIC);
 	var value_wait = block.getFieldValue('WAIT');  
 	var code = `move(${value_distance},${value_wait})\n`;
 	return code;
 };
 Blockly.Python['invent_turn'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	var value_degrees = block.getFieldValue('DEGREES');
 	var value_wait = block.getFieldValue('WAIT');  
 	var code = `turn(${value_degrees},${value_wait})\n`;
 	return code;
 };
 Blockly.Python['invent_spin'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	var value_times = block.getFieldValue('TIMES');
 	var value_wait = block.getFieldValue('WAIT');  
 	var code = `spin(${value_times},${value_wait})\n`;
 	return code;
 };
 Blockly.Python['invent_speed'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	var value_speed = Blockly.Python.valueToCode(block, 'SPEED', Blockly.Python.ORDER_ATOMIC);
 	var code = `speed(${value_speed})\n`;
 	return code;
 };
 Blockly.Python['invent_stop'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	return 'move(0,"false")\n';
 };
 Blockly.Python['invent_moving'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	return ['moving()', Blockly.JavaScript.ORDER_NONE]; 
 };
 Blockly.Python['invent_button'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	return ['button()', Blockly.JavaScript.ORDER_NONE]; 
 };
 Blockly.Python['invent_sensor'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	var value_channel = block.getFieldValue('CHANNEL');
 	return [`obstacle("${value_channel}")`, Blockly.JavaScript.ORDER_NONE];
 };
 Blockly.Python['invent_linesensor'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	var value_channel = block.getFieldValue('CHANNEL');
 	return [`line("${value_channel}")`, Blockly.JavaScript.ORDER_NONE];
 };
 Blockly.Python['invent_gamepad'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	return ['gamepadbuttons()',Blockly.JavaScript.ORDER_NONE];
 };
 Blockly.Python['invent_colorRGB'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	var value_red = Blockly.Python.valueToCode(block, 'red', Blockly.Python.ORDER_ATOMIC);
 	var value_green = Blockly.Python.valueToCode(block, 'green', Blockly.Python.ORDER_ATOMIC);
 	var value_blue = Blockly.Python.valueToCode(block, 'blue', Blockly.Python.ORDER_ATOMIC);
@@ -68,48 +68,48 @@ Blockly.Python['invent_colorRGB'] = function(block) {
   	return [code, Blockly.Python.ORDER_NONE];
 };
 Blockly.Python['invent_color'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	var color = block.getFieldValue('color');
 	var h = Tool.HEX2RGB(color);
 	var code = `(${h.r},${h.g},${h.b})`;
 	return [code, Blockly.Python.ORDER_NONE];
 };
 Blockly.Python['invent_LED'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	var value_channel = block.getFieldValue('CHANNEL');
 	var value_color = Blockly.Python.valueToCode(block, 'color', Blockly.Python.ORDER_NONE);
 	var code = `np[${value_channel}]=${value_color}\nnp.write()\n`;
 	return code;
 };
 Blockly.Python['invent_obstacleLED'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	var value_LEDnum = Blockly.Python.valueToCode(block, 'LEDnum', Blockly.Python.ORDER_ATOMIC);
 	var value_color = Blockly.Python.valueToCode(block, 'color', Blockly.Python.ORDER_NONE);
 	var code = `facenp[${value_LEDnum}]=${value_color}\nfacenp.write()\n`;
 	return code;
 };
 Blockly.Python['invent_speed'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	var value_speed = Blockly.Python.valueToCode(block, 'SPEED', Blockly.Python.ORDER_ATOMIC);
 	var code = `speed(${value_speed})\n`;
 	return code;
 };
 
 Blockly.Python['invent_espnowinit'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	return 'espinit()\n';
 };
 Blockly.Python['invent_espnowaddpeer'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	var value_peer = block.getFieldValue('PEER');
 	return `try:\n  espaddpeer("${value_peer}")\nexcept:\n  pass\n`;
 };
 Blockly.Python['invent_espnowrcv'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	return ['esprcv()', Blockly.JavaScript.ORDER_NONE]; 
 };
 Blockly.Python['invent_espnowavail'] = function(block) {
-	Blockly.Python.definitions_['import_invent'] = 'from invent import *';
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	return ['espavail()', Blockly.JavaScript.ORDER_NONE]; 
 };
 Blockly.Python['invent_espnowsend'] = function(block) {
@@ -118,7 +118,7 @@ Blockly.Python['invent_espnowsend'] = function(block) {
 	return code;
 };
 Blockly.Python['invent_wavplay'] = function(block) {
-	Blockly.Python.definitions_['import_wavplay'] = 'from wavplay import *';
+	Blockly.Python.definitions_['import_wavplay'] = 'from core.wavplay import *';
 	var value_fname = Blockly.Python.valueToCode(block, 'fname', Blockly.Python.ORDER_ATOMIC);
 	var code = `wavplay(${value_fname})\n`;
 	return code;
