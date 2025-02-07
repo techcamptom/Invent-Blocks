@@ -5368,7 +5368,7 @@ Blockly.Python['gps_init'] = function(block) {
 	Blockly.Python.definitions_['import_uart'] = 'from machine import UART';
 	Blockly.Python.definitions_['import_micropyGPS'] = 'from micropyGPS import MicropyGPS';
 
-	var code =  'gps_serial = machine.UART(' + uart + ', baudrate=9600, tx=' + tx + ', rx=' + rx + ')\n';
+	var code =  'gps_serial = UART(' + uart + ', baudrate=9600, tx=' + tx + ', rx=' + rx + ')\n';
 	    code += 'gps = MicropyGPS()\n';
 	return code;
 };
