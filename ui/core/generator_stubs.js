@@ -486,9 +486,9 @@ Blockly.Python['onewire_ds18x20_read_temp'] = function(block) {
 Blockly.Python['init_mpu6050'] = function(block) {
   Blockly.Python.definitions_['import_MPU6050'] = 'from mpu6050 import MPU6050';
   Blockly.Python.definitions_['import_I2C_Pin'] = 'from machine import I2C, Pin';
+  Blockly.Python.definitions_['i2c_setup'] = 'bus=I2C(scl=Pin(22), sda=Pin(21))\n';
 
-  var code = 'i2c = I2C(scl=Pin(22), sda=Pin(21))\n';
-  code += 'mpu6050 = MPU6050(i2c)\n';
+  var code = 'mpu6050 = MPU6050(bus)\n';
   return code;
 };
 
@@ -549,15 +549,11 @@ Blockly.Python['init_oled'] = function(block) {
   var sda = Blockly.Python.valueToCode(block, 'sda', Blockly.Python.ORDER_ATOMIC);
   var i2c = Blockly.Python.valueToCode(block, 'i2c', Blockly.Python.ORDER_ATOMIC);
 
-  Blockly.Python.definitions_['import_pin'] = 'from machine import Pin';
-  Blockly.Python.definitions_['import_oled_a'] = 'from machine import I2C';
+  Blockly.Python.definitions_['import_I2C_Pin'] = 'from machine import I2C, Pin';
   Blockly.Python.definitions_['import_ssd'] = 'import ssd1306';
-  //Blockly.Python.definitions_['import_sleep'] = 'from time import sleep';
+  Blockly.Python.definitions_['i2c_setup'] = 'bus=I2C(scl=Pin(22), sda=Pin(21))\n';
 
-  var code = 'i2c=I2C(1, scl=Pin(22), sda=Pin(21))\n';
-      code += 'oled_width = 128\n';
-      code += 'oled_height = 64\n';
-      code += 'oled = ssd1306.SSD1306_I2C(oled_width, oled_height, i2c)\n';
+  var code = 'oled = ssd1306.SSD1306_I2C(128, 64, bus)\n';
 
   return code;
 };
@@ -6088,21 +6084,8 @@ Blockly.Python['tone'] = function(block) {
 	var value_frequency = Blockly.Python.valueToCode(block, 'frequency', Blockly.Python.ORDER_ATOMIC);
 	var d = Blockly.Python.valueToCode(block, 'duration', Blockly.Python.ORDER_ATOMIC);
 
-	Blockly.Python.definitions_['import_pin'] = 'from machine import Pin';
-	Blockly.Python.definitions_['import_pwm'] = 'from machine import PWM';
-  	Blockly.Python.definitions_['import_time'] = 'import time';
-  	
-
-	var code = 'pwmout = PWM(Pin(25, mode=Pin.OUT))\n';
-	code += 'pwmout.freq(' + value_frequency + ')\n';
-	code += 'pwmout.duty_u16(512)\n';
+	var code = 'playtone(' + value_frequency + ','+d+')\n';
 	
-	var d1=parseFloat(d);
-	if (d1==0)
-		code += '';
-	else
-		code += 'time.sleep(' + d + ')\npwmout.deinit()\n';
-
 	return code;
   };
 
@@ -6507,8 +6490,8 @@ Blockly.Python['sht20_humidity'] = function(block) {
 Blockly.Python['aht10_init'] = function(block) {
 	Blockly.Python.definitions_['import_I2C_Pin'] = 'from machine import I2C, Pin';
 	Blockly.Python.definitions_['import_aht'] = 'import ahtx0';
-	var code = 'bus=I2C(scl=Pin(22), sda=Pin(21))\n';
-	code += 'aht10 = ahtx0.AHT10(bus)\n';
+	Blockly.Python.definitions_['i2c_setup'] = 'bus=I2C(scl=Pin(22), sda=Pin(21))\n';
+	var code = 'aht10 = ahtx0.AHT10(bus)\n';
 	return code;
 };
 
@@ -6574,8 +6557,8 @@ Blockly.Python['irnec_receive'] = function(block) {
 Blockly.Python['vl53l0x_init'] = function(block) {
 	Blockly.Python.definitions_['import_I2C_Pin'] = 'from machine import I2C, Pin';
 	Blockly.Python.definitions_['import_vl53l0x'] = 'import vl53l0x';
-	var code = 'i2c=I2C(scl=Pin(22), sda=Pin(21))\n';
-		code += 'vl53l0x=vl53l0x.VL53L0X(i2c)\n';
+	Blockly.Python.definitions_['i2c_setup'] = 'bus=I2C(scl=Pin(22), sda=Pin(21))\n';
+    var code = 'vl53l0x=vl53l0x.VL53L0X(bus)\n';
 		code += 'vl53l0x.start()\n';
 	return code;
 };
