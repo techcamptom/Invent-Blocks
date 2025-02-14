@@ -583,6 +583,14 @@ Blockly.Python['write_oled'] = function(block) {
 	return code;
   };
   
+  Blockly.Python['pixel_oled'] = function(block) {
+	var x1 = Blockly.Python.valueToCode(block, 'x1', Blockly.Python.ORDER_ATOMIC);
+	var y1 = Blockly.Python.valueToCode(block, 'y1', Blockly.Python.ORDER_ATOMIC);
+  
+	var code = 'oled.pixel(' + x1 + ', ' + y1 + ', 1)\n';
+	return code;
+  };
+
   Blockly.Python['line_oled'] = function(block) {
 	var x1 = Blockly.Python.valueToCode(block, 'x1', Blockly.Python.ORDER_ATOMIC);
 	var y1 = Blockly.Python.valueToCode(block, 'y1', Blockly.Python.ORDER_ATOMIC);

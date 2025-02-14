@@ -1404,6 +1404,29 @@ Blockly.Blocks['write_oled'] = {
   }
 };
 
+Blockly.Blocks['pixel_oled'] = {
+  init: function () {
+    this.appendDummyInput()
+      .appendField("Draw pixel on OLED");
+
+    this.appendValueInput("x1")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("X1");
+    this.appendValueInput("y1")
+      .setCheck("Number")
+      .setAlign(Blockly.ALIGN_RIGHT)
+      .appendField("Y1");
+
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+    this.setTooltip("Draw a pixel on OLED Display");
+    this.setHelpUrl("http://www.bipes.net.br");
+  }
+};
+
 Blockly.Blocks['line_oled'] = {
   init: function () {
     this.appendDummyInput()
