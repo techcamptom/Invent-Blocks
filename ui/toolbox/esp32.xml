@@ -1249,6 +1249,7 @@
 	<block type="gps_get_speed"> </block>
 	<block type="gps_get_date"> </block>
 	<block type="gps_get_time"> </block>
+	<block type="gps_get_satellites"> </block>
   </category>
 
   <category name="Temperature and Pressure">

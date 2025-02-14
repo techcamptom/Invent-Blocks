@@ -2137,7 +2137,7 @@ Blockly.Blocks['hcsr_init'] = {
     this.appendValueInput("trigger")
       .setCheck("Number")
       .setAlign(Blockly.ALIGN_RIGHT)
-      .appendField(new Blockly.FieldLabelSerializable("trigger pin"), "DHT_PIN_MSG"); 
+      .appendField(new Blockly.FieldLabelSerializable("trigger pin")); 
     this.appendValueInput("echo")
       .setCheck("Number")
       .setAlign(Blockly.ALIGN_RIGHT)
@@ -10618,6 +10618,18 @@ Blockly.Blocks['gps_get_time'] = {
     this.setColour(135);
     this.appendDummyInput()
         .appendField("GPS Timestamp");
+
+    this.setOutput(true);
+
+    this.setTooltip('');
+  }
+};
+
+Blockly.Blocks['gps_get_satellites'] = {
+  init: function() {
+    this.setColour(135);
+    this.appendDummyInput()
+        .appendField("GPS Satellites");
 
     this.setOutput(true);
 

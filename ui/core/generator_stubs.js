@@ -5424,6 +5424,13 @@ Blockly.Python['gps_get_time'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
+Blockly.Python['gps_get_satellites'] = function(block) {
+
+	var code = 'gps.satellites_in_view';
+  
+	return [code, Blockly.Python.ORDER_NONE];
+};
+  
 Blockly.Python['gps_coord_format'] = function(block) {
 	var dropdown_format = block.getFieldValue('format');
 	var code = 'gps.coord_format=\'' + dropdown_format + '\'\n';
