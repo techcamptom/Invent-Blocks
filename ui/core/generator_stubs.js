@@ -5747,7 +5747,7 @@ Blockly.Python['neopixel_color_numbers'] = function(block) {
   // Style block with compiled values, see block_definitions.js
   this.styleBlock([value_red, value_green, value_blue])
 
-  var code = `(${value_red},${value_green},${value_blue})`;
+  var code = `(${value_green},${value_red},${value_blue})`;
 
   return [code, Blockly.Python.ORDER_NONE];
 };
@@ -5755,7 +5755,7 @@ Blockly.Python['neopixel_color_numbers'] = function(block) {
 Blockly.Python['neopixel_color_colors'] = function(block) {
   var color = block.getFieldValue('color');
   var h = Tool.HEX2RGB(color);
-  var code = `(${h.r},${h.g},${h.b})`;
+  var code = `(${h.g},${h.r},${h.b})`;
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -5764,7 +5764,7 @@ Blockly.Python['HSL_to_RGB'] = function(block) {
   var value_saturation = Blockly.Python.valueToCode(block, 'saturation', Blockly.Python.ORDER_ATOMIC);
   var value_brightness = Blockly.Python.valueToCode(block, 'lightness', Blockly.Python.ORDER_ATOMIC);
 
-  Blockly.Python.definitions_['HSL_to_RGB'] = 'def HSL_to_RGB(h, s, l):\n	h, s, l = h/360, s/100, l/100\n	def hue2rgb (p, q, t):\n		if(t < 0.): t += 1\n		if(t > 1.): t -= 1\n		if(t < 1/6): return p + (q - p) * 6 * t\n		if(t < 1/2): return q\n		if(t < 2/3): return p + (q - p) * (2/3 - t) * 6\n		return p\n	q = l * (1 + s) if l < 0.5 else l + s - l * s\n	p = 2 * l - q\n	r, g, b = hue2rgb(p, q, h + 1/3), hue2rgb(p, q, h), hue2rgb(p, q, h - 1/3)\n	return (int(r * 255), int(g * 255), int(b * 255))\n';
+  Blockly.Python.definitions_['HSL_to_RGB'] = 'def HSL_to_RGB(h, s, l):\n	h, s, l = h/360, s/100, l/100\n	def hue2rgb (p, q, t):\n		if(t < 0.): t += 1\n		if(t > 1.): t -= 1\n		if(t < 1/6): return p + (q - p) * 6 * t\n		if(t < 1/2): return q\n		if(t < 2/3): return p + (q - p) * (2/3 - t) * 6\n		return p\n	q = l * (1 + s) if l < 0.5 else l + s - l * s\n	p = 2 * l - q\n	g, r, b = hue2rgb(p, q, h + 1/3), hue2rgb(p, q, h), hue2rgb(p, q, h - 1/3)\n	return (int(r * 255), int(g * 255), int(b * 255))\n';
 
   this.styleBlock([value_hue, value_saturation, value_brightness])
 
