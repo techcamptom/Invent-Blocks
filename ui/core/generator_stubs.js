@@ -106,7 +106,7 @@ Blockly.Python['invent_espnowaddpeer'] = function(block) {
 };
 Blockly.Python['invent_espnowrcv'] = function(block) {
 	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
-	return ['esprcv()', Blockly.JavaScript.ORDER_NONE]; 
+	return ['esprcvmsg()', Blockly.JavaScript.ORDER_NONE]; 
 };
 Blockly.Python['invent_espnowavail'] = function(block) {
 	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
