@@ -5780,7 +5780,7 @@ Blockly.Python['neopixel_init'] = function(block) {
   var value_pin = Blockly.Python.valueToCode(block, 'pin', Blockly.Python.ORDER_NONE);
   var value_number = Blockly.Python.valueToCode(block, 'number', Blockly.Python.ORDER_NONE);
 
-  var code = `spi1=SPI(1, baudrate=3200000, mosi=Pin(${value_pin}))\nspi_n=NeoPixel(spi1, ${value_number})\n`;
+  var code = `spi1=SPI(1, baudrate=3200000, mosi=Pin(${value_pin}), sck=None, miso=None)\nspi_n=NeoPixel(spi1, ${value_number})\n`;
 
   return code;
 };

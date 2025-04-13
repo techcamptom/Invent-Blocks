@@ -1,0 +1,13 @@
+{
+    "idf.espIdfPathWin": "C:\\Users\\tomwa\\esp\\v5.4\\esp-idf",
+    "idf.toolsPathWin": "C:\\Users\\tomwa\\.espressif",
+    "idf.pythonInstallPath": "C:\\Users\\tomwa\\.espressif\\tools\\idf-python\\3.11.2\\python.exe",
+    "idf.flashType": "UART",
+    "idf.portWin": "COM10",
+    "idf.customExtraVars": {
+        "IDF_TARGET": "esp32s2"
+    },
+    "idf.openOcdConfigs": [
+        "board/esp32s2-kaluga-1.cfg"
+    ]
+}
