@@ -99,10 +99,14 @@ Blockly.Python['invent_espnowinit'] = function(block) {
 	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
 	return 'espinit()\n';
 };
+Blockly.Python['invent_espnowbroadcastmac'] = function(block) {
+	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
+	return 'espbroadcastmac()\n';
+};
 Blockly.Python['invent_espnowaddpeer'] = function(block) {
 	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';
-	var value_peer = block.getFieldValue('PEER');
-	return `try:\n  espaddpeer("${value_peer}")\nexcept:\n  pass\n`;
+	var value_data = Blockly.Python.valueToCode(block, 'data', Blockly.Python.ORDER_ATOMIC);
+	return `try:\n  espaddpeer(${value_data})\nexcept:\n  pass\n`;
 };
 Blockly.Python['invent_espnowrcv'] = function(block) {
 	Blockly.Python.definitions_['import_invent'] = 'from core.invent import *';

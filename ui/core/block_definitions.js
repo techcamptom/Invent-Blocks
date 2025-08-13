@@ -219,11 +219,40 @@ Blockly.Blocks['invent_espnowinit'] = {
  this.setHelpUrl("");
   }
 };
+Blockly.Blocks['invent_espnowbroadcastmac'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("ESPNow broadcast MAC");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 Blockly.Blocks['invent_espnowaddpeer'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("ESPNow add peer")
-        .appendField(new Blockly.FieldTextInput("E89F6D09722C"), "PEER");
+    this.appendValueInput("data")
+        .setCheck("String")
+        .appendField("");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['invent_espnowsend'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("ESPNow send");
+    this.appendValueInput("data")
+        .setCheck("String")
+        .appendField("data");
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(230);

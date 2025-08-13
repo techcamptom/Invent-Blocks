@@ -1824,11 +1824,12 @@
   <category name="%{BKY_CAT_NET}">
     <category name="ESPNow">
       <block type="invent_espnowinit"></block>
+      <block type="invent_espnowbroadcastmac"></block>
       <block type="invent_espnowaddpeer">
-        <value name="PEER">
-          <shadow type="text">
-            <field name="TEXT"></field>
-          </shadow>
+        <value name="data">
+            <shadow type="text">
+              <field name="TEXT">000000000000</field>
+            </shadow>
         </value>
       </block>
       <block type="invent_espnowrcv"></block>
