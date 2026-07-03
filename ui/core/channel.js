@@ -22,7 +22,7 @@ class mux {
           // Firefox) still block it as mixed content; they get a redirect
           // offer to the HTTP version when connecting fails, see websocket.connect.
           this.available = ['webserial', 'websocket', 'webbluetooth'];
-          this.currentChannel = 'webserial';
+          this.currentChannel = 'websocket';
         break;
         case 'http:':
           this.available = ['websocket'];
