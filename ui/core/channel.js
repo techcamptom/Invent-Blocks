@@ -42,6 +42,19 @@ class mux {
       webbluetooth: ['https://code.inventblocks.com/ui', 'the HTTPS version']
     }
 
+    // Whether this browser implements Local Network Access (Chrome 147+).
+    // Resolved asynchronously at startup; undefined until then. Browsers
+    // without it can never open ws:// from an HTTPS page, so websocket.connect
+    // uses this to offer the HTTP version up front — Safari fails the socket
+    // asynchronously rather than throwing, so it can't be caught at connect.
+    this.lnaSupported = undefined;
+    if (navigator.permissions)
+      navigator.permissions.query({name: 'local-network-access'})
+        .then(() => {this.lnaSupported = true;})
+        .catch(() => {this.lnaSupported = false;});
+    else
+      this.lnaSupported = false;
+
     // Guidance when loaded over HTTP: Chrome 147+ silently blocks board
     // connections (Local Network Access) from public HTTP pages, with no
     // site-setting override. Detect LNA by its permission — the query throws
@@ -234,6 +247,11 @@ class websocket {
     else if (url.length==6) // This will be a 6-char truncated MAC code so add 'Invent' before and '.local' after: the board answers for that name via mDNS (network.hostname in boot.py), and the .local suffix is what lets Chrome treat it as a local device from HTTPS pages
       url='Invent'+url+'.local';
     url = 'ws://'+url+':8266/';
+    if (window.location.protocol == 'https:' && Channel.mux.lnaSupported === false) {
+      if (confirm('This browser cannot connect to boards from the HTTPS version of this site. Continue on the HTTP version?'))
+        window.location.replace(Channel.mux.ifunavailable['websocket'][0]);
+      return;
+    }
     UI ['workspace'].connecting ();
     try {
       this.ws = new WebSocket(url);
