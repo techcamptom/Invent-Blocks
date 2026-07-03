@@ -15,10 +15,14 @@ class mux {
           this.isLocalFile = true;
         break;
         case 'https:':
-          this.available = ['webserial', 'webbluetooth'];
+          // Chrome 147+ (Local Network Access) allows ws:// to private IPs and
+          // .local names from HTTPS pages behind a permission prompt, while
+          // blocking them outright from public HTTP pages — so the network
+          // channel must be offered here. Browsers without LNA (Safari,
+          // Firefox) still block it as mixed content; they get a redirect
+          // offer to the HTTP version when connecting fails, see websocket.connect.
+          this.available = ['webserial', 'websocket', 'webbluetooth'];
           this.currentChannel = 'webserial';
-          var x = document.getElementById("networkDiv");
-          x.style.display = "none";
         break;
         case 'http:':
           this.available = ['websocket'];
@@ -36,6 +40,26 @@ class mux {
       webserial: ['https://code.inventblocks.com/ui', 'the HTTPS version'],
       websocket: ['http://code.inventblocks.com/ui', 'the HTTP version'],
       webbluetooth: ['https://code.inventblocks.com/ui', 'the HTTPS version']
+    }
+
+    // Guidance when loaded over HTTP: Chrome 147+ silently blocks board
+    // connections (Local Network Access) from public HTTP pages, with no
+    // site-setting override. Detect LNA by its permission — the query throws
+    // on browsers without it — instead of sniffing versions.
+    if (window.location.protocol == 'http:' && !this.isLocalFile && navigator.permissions) {
+      window.addEventListener('load', () => {
+        navigator.permissions.query({name: 'local-network-access'}).then(() => {
+          if (confirm('This version of Chrome blocks connections to boards from the HTTP version of this site. Continue on the HTTPS version?'))
+            window.location.replace(window.location.href.replace(/^http:/, 'https:'));
+        }).catch(() => {
+          // No LNA: either a browser that still allows ws:// from HTTP pages
+          // (Safari, Firefox) — fine — or an out of date Chrome that will
+          // break when it updates past v147. Flag the latter.
+          let chrome_ = navigator.userAgentData ? navigator.userAgentData.brands.find(b => /Chromium|Google Chrome/i.test(b.brand)) : undefined;
+          if (chrome_ && parseInt(chrome_.version) < 147)
+            alert(`Your Chrome (v${chrome_.version}) is out of date. Connecting to boards still works for now, but will stop when Chrome updates past v147. Please update Chrome (⋮ > Help > About Google Chrome), then use https://code.inventblocks.com/ui instead.`);
+        });
+      });
     }
   }
 	/**
@@ -207,11 +231,20 @@ class websocket {
   connect (url, pass) {
     if (url=='')
       url='192.168.4.1';
-    else if (url.length==6) // This will be a 6-char truncated MAC code so add 'Invent' before as this will be it's host name on the network
-      url='Invent'+url;
+    else if (url.length==6) // This will be a 6-char truncated MAC code so add 'Invent' before and '.local' after: the board answers for that name via mDNS (network.hostname in boot.py), and the .local suffix is what lets Chrome treat it as a local device from HTTPS pages
+      url='Invent'+url+'.local';
     url = 'ws://'+url+':8266/';
     UI ['workspace'].connecting ();
-    this.ws = new WebSocket(url);
+    try {
+      this.ws = new WebSocket(url);
+    } catch (e) {
+      // Browsers without Local Network Access (Safari, Firefox) block ws://
+      // from HTTPS pages as mixed content; their working path is the HTTP version.
+      UI ['workspace'].runAbort ();
+      if (confirm('This browser cannot connect to boards from the HTTPS version of this site. Continue on the HTTP version?'))
+        window.location.replace(Channel.mux.ifunavailable['websocket'][0]);
+      return;
+    }
     this.ws.binaryType = 'arraybuffer';
     this.ws.onopen = () => {
       term.on();
