@@ -83,7 +83,7 @@ class mux {
     if (this.available.includes(channel_)) {
       this.currentChannel = channel_;
       mux.disconnect ();
-      this.connect ();
+      return this.connect ();
 
       } else if (this.ifunavailable [channel_] != undefined) {
         let msg = `The channel ${channel_} is not yet available in this version, but at ${this.ifunavailable [channel_] [0]}`;
@@ -100,13 +100,13 @@ class mux {
   connect () {
     switch (this.currentChannel) {
       case 'websocket':
-        Channel ['websocket'].connect(UI ['workspace'].websocket.url.value, UI ['workspace'].websocket.pass.value);
+        return Channel ['websocket'].connect(UI ['workspace'].websocket.url.value, UI ['workspace'].websocket.pass.value);
       break;
       case 'webserial':
-        Channel ['webserial'].connect();
+        return Channel ['webserial'].connect();
       break;
       case 'webbluetooth':
-        Channel ['webbluetooth'].connect();
+        return Channel ['webbluetooth'].connect();
       break;
     }
   }
@@ -411,6 +411,8 @@ class webserial {
     this.encoder = new TextEncoder();
     this.appendStream = undefined;
     this.shouldListen = true;
+    this.readAbortController = undefined;
+    this.readPipe = undefined;
     this.packetSize = 100;
     this.speed = 115200;
   }
@@ -440,12 +442,13 @@ class webserial {
     if (typeof navigator.serial == "undefined") {
       UI ['notify'].send(MSG['notAvailableFlag'].replaceAll('$1', 'WebSerial API'));
       term.write(MSG['notAvailableFlag'].replaceAll('$1', 'WebSerial API'));
-      return;
+      return Promise.resolve(false);
     }
-    navigator.serial.requestPort ().then((port) => {
+    return navigator.serial.requestPort ().then((port) => {
       UI ['workspace'].connecting ();
       this.port = port;
-      this.port.open({baudRate: [this.speed] }).then(() => {
+      return this.port.open({baudRate: [this.speed] }).then(() => {
+        this.shouldListen = true;
         const appendStream = new WritableStream({
           write(chunk) {
             if(Channel ['webserial'].shouldListen) {
@@ -474,32 +477,42 @@ class webserial {
             }
           }
         });
-        this.port.readable
-        .pipeThrough(new TextDecoderStream())
-        .pipeTo(appendStream);
+        this.readAbortController = new AbortController();
+        this.readPipe = this.port.readable
+          .pipeThrough(new TextDecoderStream())
+          .pipeTo(appendStream, {signal: this.readAbortController.signal})
+          .catch((e) => {
+            if (e.name != 'AbortError')
+              UI ['notify'].log(e);
+          });
 
 
         this.connect_ ();
 
         this.resetBoard ();
+        return true;
 
       }).catch((e) => {
         if (e.code == 11) {
           this.connect_ ();
           this.resetBoard ();
           this.shouldListen = true;
+          return true;
         }
         UI ['notify'].log(e);
+        return false;
       });
 
     }).catch((e) => {
         UI ['notify'].log(e);
+        return false;
     });
   }
   /**
    * User interface styling for when connected via webserial protocol.
    */
   connect_ () {
+    this.shouldListen = true;
     term.on();
     term.write('\x1b[31mConnected using Web Serial API !\x1b[m\r\n');
     this.connected=true;
@@ -512,26 +525,41 @@ class webserial {
    * Disconnect device connected with webserial protocol.
    */
   disconnect () {
-    const writer = this.port.writable.getWriter();
-    writer.close().then(() => {
-      this.port.close().then(() => {
-          this.port = undefined;
-        }).catch((e) => {
-          UI ['notify'].log(e);
-          writer.abort();
-          this.port = undefined;
-          this.shouldListen = false;
-        })
-         if (term)
-          term.write('\x1b[31mDisconnected\x1b[m\r\n');
-        this.buffer_ = [];
-        this.last4chars = '';
-        this.connected = false;
-        clearInterval(this.watcher);
-        term.off();
-        UI ['workspace'].runAbort();
-    })
+    let port = this.port;
+    let closeReader = Promise.resolve();
+    let closeWriter = Promise.resolve();
 
+    if (this.readAbortController) {
+      this.readAbortController.abort();
+      closeReader = this.readPipe || Promise.resolve();
+    }
+
+    if (port && port.writable) {
+      const writer = port.writable.getWriter();
+      closeWriter = writer.close()
+        .catch((e) => {UI ['notify'].log(e)})
+        .then(() => {writer.releaseLock()});
+    }
+
+    return Promise.all([closeReader, closeWriter])
+      .then(() => {return port ? port.close() : undefined})
+      .catch((e) => {
+      UI ['notify'].log(e);
+    }).then(() => {
+      this.port = undefined;
+      this.readAbortController = undefined;
+      this.readPipe = undefined;
+      this.shouldListen = false;
+      if (term)
+        term.write('\x1b[31mDisconnected\x1b[m\r\n');
+      this.buffer_ = [];
+      this.last4chars = '';
+      this.connected = false;
+      clearInterval(this.watcher);
+      term.off();
+      UI ['workspace'].runAbort();
+      return true;
+    });
   }
   /**
    * Reset board on connect with webserial protocol,
@@ -773,7 +801,4 @@ class webbluetooth {
     Files.received_string = Files.received_string.concat(chunk);
   }
 }
-
-
-
 

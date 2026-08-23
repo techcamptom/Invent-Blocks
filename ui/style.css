@@ -206,7 +206,7 @@ h1 {
   background-color: #fff;
 }
 
-#bluetoothButton, #serialButton, #networkButton, #scanButton{
+#bluetoothButton, #serialButton, #networkButton, #scanButton, #configWifiButton{
   display: inline-flex;
   align-items: center;
 }
@@ -276,11 +276,17 @@ input.checkswitch[type="checkbox"] {
     transform: translateX(100%);
 }
 
-#scanButton {
+#scanButton, #configWifiButton {
   line-height:1.25rem;
   font-size: 0.8rem;
   margin: 0.125rem;
-  padding-right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+}
+.network-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 #bluetoothButton, #serialButton, #networkButton {
   font-weight: bold;
@@ -315,6 +321,124 @@ input.checkswitch[type="checkbox"] {
 @keyframes spin { 100% { transform:rotate(360deg); } }
 #scanButton:hover:before {
   animation:spin 1s linear infinite;
+}
+
+/* Serial WiFi configuration dialog */
+.wifi-config-dialog {
+  box-sizing: border-box;
+  width: min(28rem, calc(100vw - 2rem));
+  padding: 1.25rem;
+  border: 1px solid #aaa;
+  border-radius: 1.5rem;
+  box-shadow: 0 0.25rem 1rem rgba(0,0,0,0.35);
+  color: #111;
+}
+.wifi-config-dialog::backdrop {
+  background: rgba(0,0,0,0.35);
+}
+.wifi-config-dialog h2,
+.wifi-config-dialog p {
+  margin-top: 0;
+}
+.wifi-config-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.wifi-config-heading h2 {
+  margin-bottom: 0.5rem;
+}
+.wifi-config-dialog .wifi-config-close {
+  border: 0;
+  background: transparent;
+  font-size: 1.75rem;
+  line-height: 1;
+  padding: 0.25rem;
+}
+.wifi-config-dialog label {
+  display: block;
+  margin: 0.75rem 0 0.25rem;
+  font-weight: bold;
+}
+.wifi-config-dialog input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 2.5rem;
+  border: 1px solid #aaa;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+.wifi-password-field {
+  display: flex;
+  gap: 0.5rem;
+}
+.wifi-password-field button {
+  min-width: 4.5rem;
+}
+.wifi-config-status {
+  min-height: 1.5rem;
+  margin: 0;
+  padding-top: 0.75rem;
+  color: #555;
+}
+.wifi-config-status.working {
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+.wifi-config-status.success {
+  color: #16733b;
+}
+.wifi-config-status.error {
+  color: #b42318;
+}
+.wifi-config-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.wifi-config-result-dialog {
+  width: min(26rem, calc(100vw - 2rem));
+}
+.wifi-config-result-message {
+  margin: 0.75rem 0 1.25rem;
+  font-size: 1.1rem;
+  color: #16733b;
+}
+.wifi-config-dialog button {
+  cursor: pointer;
+  border: 1px solid #aaa;
+  border-radius: 0.75rem;
+  background: #fff;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  transition: background-color ease .125s, border-color ease .125s;
+}
+.wifi-config-dialog button:hover {
+  background: #f3f3f3;
+  border-color: #777;
+}
+.wifi-config-dialog button.primary {
+  color: #fff;
+  background: #3298dc;
+  border-color: #3298dc;
+  font-weight: bold;
+}
+.wifi-config-dialog button.primary:hover {
+  background: #247db5;
+  border-color: #247db5;
+}
+.wifi-config-dialog .wifi-config-close,
+.wifi-config-dialog .wifi-config-close:hover {
+  border: 0;
+  background: transparent;
+  padding: 0.25rem;
+}
+.wifi-config-dialog button:disabled {
+  cursor: wait;
+  opacity: 0.6;
 }
 
 /* Tabs */
@@ -782,6 +906,9 @@ button.icon.medium:before  {
 }
 #scanButton:before {
   background-position: left calc(-1.5rem*14) top;
+}
+#configWifiButton:before {
+  background-position: left calc(-1.5rem*10) top;
 }
 #settingsGeneric:before {
   background-position: left calc(-1.5rem*16) top;

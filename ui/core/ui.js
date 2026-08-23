@@ -256,6 +256,273 @@ function channelPanel (button_, panel_) {
   this.network.onclick = () => {this.hidePanel ('websocket'); Channel['mux'].switch('websocket');};
 }
 
+/**
+ * Configure the WiFi credentials stored on an Invent! board over Web Serial.
+ * The browser remembers only their hexadecimal representation for quick setup
+ * of multiple boards.
+ */
+class wifiConfig {
+  constructor () {
+    this.ssidStorageKey = 'invent_wifi_ssid_hex';
+    this.passwordStorageKey = 'invent_wifi_password_hex';
+    this.writeMarker = '__INVENT_WIFI_CONFIG_OK__';
+    this.errorMarker = '__INVENT_WIFI_CONFIG_ERROR__';
+    this.statusMarker = '__INVENT_WIFI_STATUS__';
+    this.operation = 0;
+    this.pollTimer = undefined;
+    this.timeoutTimer = undefined;
+
+    this.openButton = get('#configWifiButton');
+    this.dialog = get('#wifiConfigDialog');
+    this.form = get('#wifiConfigForm');
+    this.ssid = get('#wifiConfigSsid');
+    this.password = get('#wifiConfigPassword');
+    this.passwordToggle = get('#wifiConfigPasswordToggle');
+    this.status = get('#wifiConfigStatus');
+    this.saveButton = get('#wifiConfigSave');
+    this.cancelButton = get('#wifiConfigCancel');
+    this.closeButton = get('#wifiConfigClose');
+    this.successDialog = get('#wifiConfigSuccessDialog');
+    this.successMessage = get('#wifiConfigSuccessMessage');
+    this.anotherButton = get('#wifiConfigAnother');
+    this.successCloseButton = get('#wifiConfigSuccessClose');
+
+    this.openButton.onclick = () => {this.connectThenOpen()};
+    this.passwordToggle.onclick = () => {this.togglePassword()};
+    this.cancelButton.onclick = () => {this.close()};
+    this.closeButton.onclick = () => {this.close()};
+    this.anotherButton.onclick = () => {this.configureAnother()};
+    this.successCloseButton.onclick = () => {this.successDialog.close()};
+    this.form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      this.configure();
+    });
+  }
+
+  encodeHex (value) {
+    return Array.from(new TextEncoder().encode(value))
+      .map(byte => byte.toString(16).padStart(2, '0'))
+      .join('');
+  }
+
+  decodeHex (value) {
+    if (!value || value.length % 2 != 0 || !/^[0-9a-f]+$/i.test(value))
+      return '';
+    let bytes = new Uint8Array(value.match(/.{2}/g).map(byte => parseInt(byte, 16)));
+    return new TextDecoder().decode(bytes);
+  }
+
+  connectThenOpen () {
+    if (Channel ['webserial'].connected) {
+      this.open();
+      return Promise.resolve(true);
+    }
+
+    this.openButton.disabled = true;
+    let connection = Channel ['mux'].currentChannel == 'webserial'
+      ? Channel ['webserial'].connect()
+      : Channel ['mux'].switch('webserial');
+
+    return Promise.resolve(connection).then((connected) => {
+      this.openButton.disabled = false;
+      if (connected && Channel ['webserial'].connected) {
+        this.open();
+        return true;
+      }
+      return false;
+    });
+  }
+
+  open () {
+    this.ssid.value = this.decodeHex(localStorage.getItem(this.ssidStorageKey));
+    this.password.value = this.decodeHex(localStorage.getItem(this.passwordStorageKey));
+    this.password.type = 'password';
+    this.passwordToggle.innerText = 'Show';
+    this.setBusy(false);
+    this.setStatus('', '');
+    this.dialog.showModal();
+    this.ssid.focus();
+  }
+
+  close () {
+    if (!this.saveButton.disabled && this.dialog.open)
+      this.dialog.close();
+  }
+
+  togglePassword () {
+    let showPassword = this.password.type == 'password';
+    this.password.type = showPassword ? 'text' : 'password';
+    this.passwordToggle.innerText = showPassword ? 'Hide' : 'Show';
+  }
+
+  configureAnother () {
+    this.successDialog.close();
+    this.openButton.disabled = true;
+    let disconnect = Channel ['webserial'].connected
+      ? Channel ['webserial'].disconnect()
+      : Promise.resolve(true);
+
+    return Promise.resolve(disconnect).then(() => {
+      this.openButton.disabled = false;
+      return this.connectThenOpen();
+    });
+  }
+
+  setBusy (busy) {
+    this.saveButton.disabled = busy;
+    this.cancelButton.disabled = busy;
+    this.closeButton.disabled = busy;
+    this.ssid.disabled = busy;
+    this.password.disabled = busy;
+    this.passwordToggle.disabled = busy;
+  }
+
+  setStatus (message, type) {
+    this.status.innerText = message;
+    this.status.className = `wifi-config-status${type ? ' ' + type : ''}`;
+  }
+
+  clearTimers () {
+    clearInterval(this.pollTimer);
+    clearTimeout(this.timeoutTimer);
+    this.pollTimer = undefined;
+    this.timeoutTimer = undefined;
+  }
+
+  buildWriteCommand (ssidHex, passwordHex) {
+    let code = [
+      "path = 'core/config.txt'",
+      "with open(path, 'r') as file:",
+      " original = file.read()",
+      "lines = original.splitlines()",
+      `updates = {'mode': 'wifi', 's': '${ssidHex}', 'p': '${passwordHex}'}`,
+      "replaced = set()",
+      "for index in range(len(lines)):",
+      " if '=' in lines[index]:",
+      "  key = lines[index].split('=', 1)[0]",
+      "  if key in updates:",
+      "   lines[index] = key + '=' + updates[key]",
+      "   replaced.add(key)",
+      "for key in ('mode', 's', 'p'):",
+      " if key not in replaced:",
+      "  lines.append(key + '=' + updates[key])",
+      "content = '\\n'.join(lines) + '\\n'",
+      "try:",
+      " with open(path, 'w') as file:",
+      "  file.write(content)",
+      " with open(path, 'r') as file:",
+      "  saved = file.read()",
+      " if saved != content:",
+      "  raise OSError('WiFi config verification failed')",
+      " print('__INVENT_WIFI_' + 'CONFIG_OK__')",
+      "except Exception as error:",
+      " with open(path, 'w') as file:",
+      "  file.write(original)",
+      " print('__INVENT_WIFI_' + 'CONFIG_ERROR__' + repr(error))"
+    ].join('\n');
+    return `exec(${JSON.stringify(code)})\r`;
+  }
+
+  buildStatusCommand () {
+    let code = [
+      "import network",
+      "wifi = network.WLAN(network.STA_IF)",
+      "print(('__INVENT_WIFI_' + 'STATUS__') + ('%s|%s' % (wifi.isconnected(), wifi.ifconfig()[0] if wifi.isconnected() else '')))"
+    ].join('\n');
+    return `exec(${JSON.stringify(code)})\r`;
+  }
+
+  configure () {
+    if (!Channel ['webserial'].connected || Channel ['mux'].currentChannel != 'webserial') {
+      this.setStatus('Connect an Invent! board using Serial first.', 'error');
+      return;
+    }
+
+    if (!this.ssid.value.length || !this.password.value.length) {
+      this.setStatus('Enter both the SSID and password.', 'error');
+      return;
+    }
+
+    let ssidHex = this.encodeHex(this.ssid.value);
+    let passwordHex = this.encodeHex(this.password.value);
+    let operation = ++this.operation;
+
+    this.clearTimers();
+    this.setBusy(true);
+    this.setStatus('Saving WiFi settings...', 'working');
+    Files.received_string = '';
+    mux.clearBuffer();
+    mux.bufferUnshift('\r\x03\x03');
+    mux.bufferPush(this.buildWriteCommand(ssidHex, passwordHex));
+
+    this.pollTimer = setInterval(() => {
+      if (operation != this.operation)
+        return;
+      if (Files.received_string.includes(this.errorMarker)) {
+        this.finishWithError('The board could not save the WiFi configuration.');
+      } else if (Files.received_string.includes(this.writeMarker)) {
+        this.onWriteVerified(operation, ssidHex, passwordHex);
+      }
+    }, 100);
+
+    this.timeoutTimer = setTimeout(() => {
+      if (operation == this.operation)
+        this.finishWithError('The board did not confirm the configuration write.');
+    }, 15000);
+  }
+
+  onWriteVerified (operation, ssidHex, passwordHex) {
+    this.clearTimers();
+    localStorage.setItem(this.ssidStorageKey, ssidHex);
+    localStorage.setItem(this.passwordStorageKey, passwordHex);
+    this.setStatus('Restarting and checking WiFi...', 'working');
+    Files.received_string = '';
+    mux.bufferPush('\x04');
+    this.timeoutTimer = setTimeout(() => {this.checkConnection(operation)}, 30000);
+  }
+
+  checkConnection (operation) {
+    if (operation != this.operation)
+      return;
+    if (!Channel ['webserial'].connected) {
+      this.finishWithError('Configuration saved, but the serial connection was lost during restart.');
+      return;
+    }
+
+    Files.received_string = '';
+    mux.bufferPush(this.buildStatusCommand());
+
+    this.pollTimer = setInterval(() => {
+      if (operation != this.operation)
+        return;
+      let match = Files.received_string.match(new RegExp(this.statusMarker + '(True|False)\\|([^\\r\\n]*)'));
+      if (!match)
+        return;
+      this.clearTimers();
+      this.setBusy(false);
+      if (match[1] == 'True') {
+        this.dialog.close();
+        this.successMessage.innerText = `Connected successfully. Board IP: ${match[2]}`;
+        this.successDialog.showModal();
+      } else {
+        this.setStatus('Configuration saved, but the board did not connect to that WiFi network.', 'error');
+      }
+    }, 100);
+
+    this.timeoutTimer = setTimeout(() => {
+      if (operation == this.operation)
+        this.finishWithError('Configuration saved, but the WiFi connection could not be confirmed.');
+    }, 15000);
+  }
+
+  finishWithError (message) {
+    this.clearTimers();
+    this.operation++;
+    this.setBusy(false);
+    this.setStatus(message, 'error');
+  }
+}
+
 
 /**
  * The notification class is used to show notifications and keep logs.
@@ -830,8 +1097,3 @@ workspace.prototype.loadDataboard = function (JSON_) {
     UI ['notify'].log(e);
   }
 }
-
-
-
-
-

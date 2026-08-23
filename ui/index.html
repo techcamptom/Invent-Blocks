@@ -63,7 +63,7 @@ function checkCookie() {
 
   gtag('config', 'UA-162001686-1');
 </script>
-  <link rel="stylesheet" href="style.css?ver=0.2.3.841940">
+  <link rel="stylesheet" href="style.css?ver=0.2.4.3">
   <link rel="stylesheet" href="core/libs.css">
   <script src="core/storage.js?ver=0.2.2.1125"></script>
   <script src="core/blockly_compressed.js?ver=0.2.1.841940"></script>
@@ -71,9 +71,9 @@ function checkCookie() {
   <script src="core/javascript_compressed.js?ver=0.2.1.841940"></script>
   <script src="core/python_compressed.js?ver=0.2.3.9292231"></script>
   <script src="core/code.js?ver=0.2.3.841940"></script>
-  <script src="core/channel.js?ver=0.2.4.3"></script>
+  <script src="core/channel.js?ver=0.2.4.6"></script>
   <script src="core/utils.js?ver=0.2.3.841940"></script>
-  <script src="core/ui.js?ver=0.2.3.841940"></script>
+  <script src="core/ui.js?ver=0.2.4.3"></script>
   <script src="core/queue.js"></script>
   <script src="core/FileSaver.js"></script>
   <script src="core/shortcut.js"></script>
@@ -185,9 +185,45 @@ document.body.appendChild(el);
       Address: <input type="text" name="webrepl_url" id="url" value="" />
       <div id="passworddiv">Password: <input type="password" name="webrepl_pass" id="password" value="invent" /></div>
       </span>
-      <button class="icon" value="Scan boards" id="scanButton" onclick="window.open('ports.html','popup','width=600,height=600'); return false;" target="popup">Scan devices</button>
+      <div class="network-actions">
+        <button class="icon" id="configWifiButton" type="button">Config WiFi</button>
+        <button class="icon" value="Scan boards" id="scanButton" onclick="window.open('ports.html','popup','width=600,height=600'); return false;" target="popup">Scan devices</button>
+      </div>
     </div>
   </div>
+
+  <dialog id="wifiConfigDialog" class="wifi-config-dialog">
+    <form id="wifiConfigForm">
+      <div class="wifi-config-heading">
+        <h2>Configure WiFi</h2>
+        <button id="wifiConfigClose" class="wifi-config-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <p>Save WiFi details to the connected board.</p>
+      <label for="wifiConfigSsid">Network name (SSID)</label>
+      <input id="wifiConfigSsid" name="ssid" type="text" autocomplete="off" required>
+      <label for="wifiConfigPassword">Password</label>
+      <div class="wifi-password-field">
+        <input id="wifiConfigPassword" name="wifi-password" type="password" autocomplete="new-password" required>
+        <button id="wifiConfigPasswordToggle" type="button" aria-controls="wifiConfigPassword">Show</button>
+      </div>
+      <p id="wifiConfigStatus" class="wifi-config-status" role="status" aria-live="polite"></p>
+      <div class="wifi-config-actions">
+        <button id="wifiConfigCancel" type="button">Cancel</button>
+        <button id="wifiConfigSave" class="primary" type="submit">Save and restart</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="wifiConfigSuccessDialog" class="wifi-config-dialog wifi-config-result-dialog">
+    <form>
+      <h2>WiFi configured</h2>
+      <p id="wifiConfigSuccessMessage" class="wifi-config-result-message" role="status"></p>
+      <div class="wifi-config-actions">
+        <button id="wifiConfigAnother" class="primary" type="button">Configure another board</button>
+        <button id="wifiConfigSuccessClose" type="button">Close</button>
+      </div>
+    </form>
+  </dialog>
 
   <div id="content_blocks" class="content"></div>
   <div id="content_console" class="content">
@@ -404,6 +440,7 @@ UI ['notify-panel'] = new panel ('#notificationButton','.notify-panel');
 UI ['channel-panel'] = new channelPanel ('#channelButton','.channel-panel');
 UI ['toolbar'] = new panel ('#toolbarButton','.toolbar');
 UI ['workspace'] = new workspace ();
+UI ['wifi-config'] = new wifiConfig ();
 
 bufferPush = mux.bufferPush;
 
@@ -719,6 +756,3 @@ function eraseCookieModal(name) {
 
 
 </html>
-
-
-
